@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+java/target/
+java/out/
+results/*
+!results/.gitkeep
+.DS_Store

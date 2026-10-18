@@ -1,0 +1,21 @@
+# Hand-checkable case shared by the Python tests and the Java SelfCheck.
+# vm <mips> <price_per_second> <host_id>
+vm 1000 0.001 0
+vm 500 0.0005 1
+# host <id> <p_idle_w> <p_max_w>
+host 0 100 200
+host 1 50 100
+# task <length_mi> <arrival_s> <deadline_s>
+task 2000 0 3
+task 1000 0 1.5
+task 1000 1 2.5
+# a fixed assignment (VM index per task) and its hand-computed objectives
+assign 0 1 0
+expect makespan 3.0
+expect energy 850.0
+expect cost 0.004
+expect imbalance 0.2
+expect sla 0.6666666667
+# what the baseline schedulers must produce on this instance
+expect_fcfs 0 1 0
+expect_minmin 0 0 0
