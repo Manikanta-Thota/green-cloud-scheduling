@@ -1,6 +1,7 @@
 """Deterministic baseline schedulers (proposal comparison methods 1 and 2).
 
-Tie-breaking is fixed (lowest task index, then lowest VM index) so results are reproducible.
+Tie-breaking is fixed (lowest task index, then lowest VM index) so results are reproducible and match
+the Java implementations exactly. Workflow tasks become ready when all their predecessors are done.
 """
 from __future__ import annotations
 import numpy as np
@@ -8,35 +9,47 @@ from .model import Instance
 
 
 def fcfs(inst: Instance) -> np.ndarray:
-    """Tasks in arrival order; each goes to the VM that can start it earliest."""
+    """Tasks in execution order; each goes to the VM that can start it earliest."""
     free = np.zeros(inst.n_vms)
+    finish = np.zeros(inst.n_tasks)
     assign = np.zeros(inst.n_tasks, dtype=int)
-    order = np.lexsort((np.arange(inst.n_tasks), inst.arrival))
     ex = inst.exec_matrix()
-    for t in order:
-        start = np.maximum(inst.arrival[t], free)
+    for t in inst.order():
+        ready = max([inst.arrival[t]] + [finish[p] for p in inst.preds[t]])
+        start = np.maximum(ready, free)
         v = int(np.argmin(start))
         assign[t] = v
-        free[v] = start[v] + ex[t, v]
+        finish[t] = free[v] = start[v] + ex[t, v]
     return assign
 
 
 def min_min(inst: Instance) -> np.ndarray:
-    """Classic Min-Min with ready times: repeatedly schedule the task whose best completion time is smallest."""
+    """Classic Min-Min with ready times: among tasks whose predecessors are scheduled, repeatedly
+    schedule the one whose best completion time is smallest."""
     ex = inst.exec_matrix()
     free = np.zeros(inst.n_vms)
+    ct = np.zeros(inst.n_tasks)
     assign = np.full(inst.n_tasks, -1, dtype=int)
-    remaining = np.arange(inst.n_tasks)
-    while len(remaining):
-        ct = np.maximum(inst.arrival[remaining, None], free[None, :]) + ex[remaining]
-        best_v = ct.argmin(axis=1)
-        best_ct = ct[np.arange(len(remaining)), best_v]
+    left = np.array([len(p) for p in inst.preds])
+    succ = [[] for _ in range(inst.n_tasks)]
+    for t, ps in enumerate(inst.preds):
+        for p in ps:
+            succ[p].append(t)
+    ready = inst.arrival.astype(float).copy()
+    remaining = [t for t in range(inst.n_tasks) if left[t] == 0]
+    while remaining:
+        rem = np.array(sorted(remaining))
+        c = np.maximum(ready[rem, None], free[None, :]) + ex[rem]
+        best_v = c.argmin(axis=1)
+        best_ct = c[np.arange(len(rem)), best_v]
         i = int(np.argmin(best_ct))          # first minimum -> lowest task index
-        t, v = remaining[i], int(best_v[i])
+        t, v = int(rem[i]), int(best_v[i])
         assign[t] = v
-        free[v] = best_ct[i]
-        remaining = np.delete(remaining, i)
+        ct[t] = free[v] = best_ct[i]
+        remaining.remove(t)
+        for s in succ[t]:
+            left[s] -= 1
+            if left[s] == 0:
+                ready[s] = max([inst.arrival[s]] + [ct[p] for p in inst.preds[s]])
+                remaining.append(s)
     return assign
-
-
-BASELINES = {"fcfs": fcfs, "minmin": min_min}

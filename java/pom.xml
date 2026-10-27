@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Maven build for the Java side. NOT yet built in the setup session (no network access there):
-     run `mvn -q compile` once on a networked machine and confirm the CloudSim Plus version below. -->
+<!-- Optional Maven build for the Java side. The project is normally built with plain javac (see
+     .claude/skills/hpeas-green-cloud/references/run-commands.md); Maven was not installed on the
+     development machine, so this POM has not been built. The CloudSim Plus coordinates below were
+     checked against Maven Central (artifact renamed from cloudsim-plus to cloudsimplus). -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -8,22 +10,20 @@
 
   <groupId>gcs</groupId>
   <artifactId>green-cloud-scheduling</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.2.0</version>
   <name>HPEAS green-cloud scheduling</name>
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- TODO(M2): confirm the current release on Maven Central before building. -->
-    <cloudsimplus.version>8.5.5</cloudsimplus.version>
+    <cloudsimplus.version>8.5.7</cloudsimplus.version>
   </properties>
 
   <dependencies>
-    <!-- Needed by the CloudSim Plus integration layer (milestone M2). The dependency-free core in
-         gcs.core does not use it, so that core also compiles with plain javac (see Makefile). -->
+    <!-- Needed only by the validation layer gcs.sim. gcs.core and gcs.opt are dependency-free. -->
     <dependency>
       <groupId>org.cloudsimplus</groupId>
-      <artifactId>cloudsim-plus</artifactId>
+      <artifactId>cloudsimplus</artifactId>
       <version>${cloudsimplus.version}</version>
     </dependency>
   </dependencies>

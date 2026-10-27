@@ -1,40 +1,79 @@
 # Frozen experiment definition (proposal Sections 3.1, 3.4, 3.5).
-# Change values here only through a documented protocol revision.
+# Change values here only through a documented protocol revision (docs/protocol.md, Section 6).
 experiment:
-  name: hpeas-green-cloud-v0
+  name: hpeas-green-cloud-v1
   master_seed: 20261018        # all instance and algorithm seeds derive from this
+  tuning_seed: 777             # separate seed stream for the tuning scenarios (never used for test runs)
   replications: 30             # independent seeds per algorithm x scenario (proposal: at least 30)
 
-algorithms:                    # proposal Section 3.1 comparison methods
+algorithms:                    # proposal Section 3.1 comparison methods (order fixes algorithm seed indices)
   - fcfs
   - minmin
-  - single_metaheuristic       # TBD: choice of algorithm (see docs/protocol.md, open decision D1)
-  - multiobjective_baseline    # TBD: choice of algorithm (open decision D2)
+  - ga                         # single global metaheuristic (D1)
+  - mogwo                      # recent multi-objective baseline, Khan et al. 2024 (D2)
   - hpeas
+ablations:                     # HPEAS with one component removed or simplified
+  - hpeas_noseed               # no heuristic seeding
+  - hpeas_nols                 # no local search
+  - hpeas_static               # local search on a fixed schedule with uniform operator choice
+  - nsga2                      # global search component alone (no seeding, no local search)
+supplementary:
+  - energy_greedy              # the energy-preferred seed heuristic on its own
+  - ga_seeded                  # fairness check: competitors given HPEAS's heuristic seeding
+  - mogwo_seeded
 
 scenario_factors:              # proposal Section 3.1 table (full factorial = 81 scenarios)
   tasks: [500, 2000, 5000]
   vms: [20, 50, 100]
   heterogeneity: [low, medium, high]
-  arrival: [steady, bursty, workflow]   # workflow generator not implemented yet
+  arrival: [steady, bursty, workflow]
 
-fixed_parameters:              # PLACEHOLDER values; replace with documented sources in M1
+fixed_parameters:
   datacentre_load: 0.7         # offered load as a fraction of total MIPS capacity
   vms_per_host: 4
-  host_p_idle_w: 100.0
-  host_p_max_w: 250.0
-  vm_price_per_mips_second: 5.0e-7
+  power_profile: specpower_2008
+  vm_price_per_second_at_1000_mips: 1.4e-5   # about 0.05 currency units per hour
+  vm_price_exponent: 1.3       # price grows faster than speed, so cost depends on placement
   task_length_mean_mi: 50000
-  task_length_sigma: 0.8       # lognormal sigma
-  deadline_slack_range: [3.0, 10.0]   # deadline = arrival + k * length / mean_vm_mips
+  task_length_sigma: 0.8       # lognormal sigma (independent tasks)
+  deadline_slack_range: [3.0, 10.0]   # deadline = arrival + k * critical-path length / mean VM MIPS
+  workflow_size_range: [20, 100]      # tasks per workflow
+  bursty:                      # two-phase MMPP (calibrated in the pilot, protocol D9)
+    peak_factor: 1.8           # burst rate = 1.8 x mean, quiet rate = 0.2 x mean
+    phase_mean_arrivals: 150   # mean phase length, in mean inter-arrival times
   heterogeneity_mips_range:
     low: [900, 1100]
     medium: [500, 1500]
     high: [250, 2500]
 
+power_profiles:                # host models alternate within a data centre
+  specpower_2008:              # HP ProLiant ML110 G4 / G5 SPECpower_ssj2008 results, the models shipped
+    p_idle_w: [86.0, 93.7]     # with CloudSim (Beloglazov and Buyya, 2012)
+    p_max_w: [117.0, 135.0]
+  proportional:                # construct-validity check: an energy-proportional server, idle = 30% of peak
+    p_idle_w: [60.0, 66.0]     # (Barroso and Hoelzle, 2007)
+    p_max_w: [200.0, 220.0]
+
+search:                        # frozen after tuning on tuning seeds (results/tuning/tuning_*.csv)
+  budget: 10000                # objective evaluations per run, identical for every metaheuristic
+  pop: 40                      # population / pack size
+  archive: 100                 # external archive size
+  pc: 0.9                      # crossover probability
+  pm: 20                       # expected number of genes mutated per child
+  stagnation: 1                # generations without energy progress before local search (adaptive)
+  ls_members: 3                # archive members improved per local-search phase
+  ls_steps: 50                 # moves per member
+  static_period: 5             # generations between local-search phases (static ablation)
+  ga_pm: 20                    # GA tuned separately (results/tuning/tuning_ga.csv)
+  ga_pc: 0.9
+
 decision_rules:                # proposal Section 3.5
-  max_makespan_degradation: 0.05     # median makespan, relative to best baseline
+  max_makespan_degradation: 0.05     # relative to the reference baseline (faster of FCFS and Min-Min)
   max_cost_increase: 0.05
   max_sla_increase_pp: 1.0           # percentage points
   alpha: 0.05
   bootstrap_resamples: 10000
+  carbon_intensity_g_per_kwh:        # secondary scenario: fixed grid intensities
+    low: 50
+    medium: 300
+    high: 700

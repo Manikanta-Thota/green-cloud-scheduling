@@ -12,7 +12,10 @@ task 1000 1 2.5
 # a fixed assignment (VM index per task) and its hand-computed objectives
 assign 0 1 0
 expect makespan 3.0
-expect energy 850.0
+# energy: a host is on from its first task start to its last finish (host 1: 0-2 s, host 0: 0-3 s)
+#   host 0: idle 100 W x 3 s + (200-100) W x (3000 MI / 1000 MIPS) = 300 + 300 = 600 J
+#   host 1: idle  50 W x 2 s + (100-50)  W x (1000 MI /  500 MIPS) = 100 + 100 = 200 J
+expect energy 800.0
 expect cost 0.004
 expect imbalance 0.2
 expect sla 0.6666666667
