@@ -1,0 +1,10 @@
+scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed
+12,1,ok,7.4,10000,fcfs|minmin|hpeas,10,20261018
+13,1,ok,10.2,10000,fcfs|minmin|hpeas,10,20261018
+14,1,ok,8.8,10000,fcfs|minmin|hpeas,10,20261018
+39,1,ok,12.6,10000,fcfs|minmin|hpeas,10,20261018
+40,1,ok,13.2,10000,fcfs|minmin|hpeas,10,20261018
+41,1,ok,10.3,10000,fcfs|minmin|hpeas,10,20261018
+66,1,ok,18.5,10000,fcfs|minmin|hpeas,10,20261018
+67,1,ok,15.4,10000,fcfs|minmin|hpeas,10,20261018
+68,1,ok,20.0,10000,fcfs|minmin|hpeas,10,20261018

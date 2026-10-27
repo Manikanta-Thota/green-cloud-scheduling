@@ -1,0 +1,4 @@
+scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed
+4,1,ok,3.6,10000,fcfs|minmin|ga|mogwo|hpeas|hpeas_noseed|hpeas_nols|hpeas_static|nsga2|energy_greedy,1,20261018
+79,1,ok,14.1,10000,fcfs|minmin|ga|mogwo|hpeas|hpeas_noseed|hpeas_nols|hpeas_static|nsga2|energy_greedy,1,20261018
+80,1,ok,13.2,10000,fcfs|minmin|ga|mogwo|hpeas|hpeas_noseed|hpeas_nols|hpeas_static|nsga2|energy_greedy,1,20261018
