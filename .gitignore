@@ -3,6 +3,16 @@ __pycache__/
 .venv/
 java/target/
 java/out/
-results/*
-!results/.gitkeep
+java/out-sim/
+java/lib/
 .DS_Store
+
+# experiment outputs are committed, except locks, partial files, scratch runs and regenerable tables
+results/**/.lock
+results/**/*.part
+results/analysis_dry/
+results/analysis/deployed.csv
+
+# Excel lock file and the tracker's queue of updates not yet written to tasks.xlsx
+docs/~$*
+docs/tasks_pending.jsonl

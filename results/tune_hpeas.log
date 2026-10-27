@@ -1,0 +1,389 @@
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.6s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.0s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.8s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.5s
+{'pm': 1, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 10, 'median_ratio': np.float64(0.9765300646247344), 'mean_ratio': np.float64(0.939808124860654), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.6s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.7s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.6s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 3.0s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.3s
+{'pm': 1, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 20, 'median_ratio': np.float64(0.9767519018318178), 'mean_ratio': np.float64(0.9405990715141195), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.6s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.7s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.5s
+{'pm': 1, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 50, 'median_ratio': np.float64(0.9696585719212395), 'mean_ratio': np.float64(0.9352357527208169), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.3s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.0s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 7.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.8s
+{'pm': 1, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 10, 'median_ratio': np.float64(0.9847005418097937), 'mean_ratio': np.float64(0.9503452852328861), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 5.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 4.3s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.7s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.3s
+{'pm': 1, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 20, 'median_ratio': np.float64(0.9819798804082005), 'mean_ratio': np.float64(0.9518250753150124), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 4.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.6s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.2s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.8s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 3.5s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.2s
+{'pm': 1, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 50, 'median_ratio': np.float64(0.9813366577591663), 'mean_ratio': np.float64(0.9413966496001791), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.6s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.2s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.6s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 6.0s
+{'pm': 1, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 10, 'median_ratio': np.float64(0.9838909497644693), 'mean_ratio': np.float64(0.9494665240239316), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.7s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.6s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.3s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.8s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.3s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.8s
+{'pm': 1, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 20, 'median_ratio': np.float64(0.9832178880420268), 'mean_ratio': np.float64(0.9504610388557401), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 4.1s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 5.0s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 4.6s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 8.0s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 6.6s
+{'pm': 1, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 50, 'median_ratio': np.float64(0.9849152197525104), 'mean_ratio': np.float64(0.9451956080747463), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 3.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.1s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 4.4s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 8.5s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 3.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 7.7s
+{'pm': 1, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 10, 'median_ratio': np.float64(0.983183066260576), 'mean_ratio': np.float64(0.9487276295236734), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 5.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 6.2s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 5.4s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 9.3s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 3.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 7.4s
+{'pm': 1, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 20, 'median_ratio': np.float64(0.9788781690815549), 'mean_ratio': np.float64(0.9350562030785231), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 5.4s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.7s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 4.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 9.9s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 4.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 7.5s
+{'pm': 1, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 50, 'median_ratio': np.float64(0.9787783511381074), 'mean_ratio': np.float64(0.9439624299442939), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 4.3s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 5.6s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 5.0s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 8.3s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 3.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 7.0s
+{'pm': 1, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 10, 'median_ratio': np.float64(0.9843113757132932), 'mean_ratio': np.float64(0.951868054421642), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 3.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.3s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.6s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.6s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.7s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.7s
+{'pm': 1, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 20, 'median_ratio': np.float64(0.9798184883784304), 'mean_ratio': np.float64(0.9417326875071053), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.6s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.8s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.3s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.1s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.0s
+{'pm': 1, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 50, 'median_ratio': np.float64(0.9802999574405082), 'mean_ratio': np.float64(0.9463644641019126), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.7s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.5s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.9s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.3s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.2s
+{'pm': 1, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 10, 'median_ratio': np.float64(0.9856770519372068), 'mean_ratio': np.float64(0.9557508473271896), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.1s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.7s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.9s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.1s
+{'pm': 1, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 20, 'median_ratio': np.float64(0.9814623197678579), 'mean_ratio': np.float64(0.949774221902529), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.4s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.5s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.2s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 7.0s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.9s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.0s
+{'pm': 1, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 50, 'median_ratio': np.float64(0.9785385741743016), 'mean_ratio': np.float64(0.9459858456933934), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.0s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.3s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.6s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 3.0s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.1s
+{'pm': 5, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 10, 'median_ratio': np.float64(0.9781014844364091), 'mean_ratio': np.float64(0.9413107456186877), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 3.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.6s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.8s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.1s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.9s
+{'pm': 5, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 20, 'median_ratio': np.float64(0.9697014834433377), 'mean_ratio': np.float64(0.9418961896421485), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 3.3s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.4s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.1s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.5s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.0s
+{'pm': 5, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 50, 'median_ratio': np.float64(0.978546299436856), 'mean_ratio': np.float64(0.9389566969332428), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.4s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.7s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.1s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.7s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.5s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.1s
+{'pm': 5, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 10, 'median_ratio': np.float64(0.9839023729498786), 'mean_ratio': np.float64(0.9456697317667615), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.2s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.2s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.8s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.3s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.5s
+{'pm': 5, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 20, 'median_ratio': np.float64(0.9812649641140432), 'mean_ratio': np.float64(0.9508974036737984), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.6s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.1s
+{'pm': 5, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 50, 'median_ratio': np.float64(0.979782789469891), 'mean_ratio': np.float64(0.944288248571816), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.2s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.1s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.6s
+{'pm': 5, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 10, 'median_ratio': np.float64(0.9826561161039075), 'mean_ratio': np.float64(0.9564474665112329), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.6s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.8s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.8s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.2s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.9s
+{'pm': 5, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 20, 'median_ratio': np.float64(0.9823686645927203), 'mean_ratio': np.float64(0.9555572670542046), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.1s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.5s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.1s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.6s
+{'pm': 5, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 50, 'median_ratio': np.float64(0.979144392163078), 'mean_ratio': np.float64(0.9490969322472651), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.4s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.0s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.1s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.7s
+{'pm': 5, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 10, 'median_ratio': np.float64(0.98321741056571), 'mean_ratio': np.float64(0.9412602734041037), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.7s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.1s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.6s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.4s
+{'pm': 5, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 20, 'median_ratio': np.float64(0.9780637920130407), 'mean_ratio': np.float64(0.9346381714503593), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.1s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.7s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.8s
+{'pm': 5, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 50, 'median_ratio': np.float64(0.9705611280858861), 'mean_ratio': np.float64(0.9493199132008857), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.2s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.9s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.2s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.3s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.5s
+{'pm': 5, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 10, 'median_ratio': np.float64(0.9842509535675634), 'mean_ratio': np.float64(0.9475336657292682), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.2s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.5s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.3s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.9s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.5s
+{'pm': 5, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 20, 'median_ratio': np.float64(0.980188883760243), 'mean_ratio': np.float64(0.9504446283998431), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.3s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.2s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.9s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.7s
+{'pm': 5, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 50, 'median_ratio': np.float64(0.9810476669727192), 'mean_ratio': np.float64(0.9453084724674281), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.1s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.9s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.1s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.2s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.6s
+{'pm': 5, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 10, 'median_ratio': np.float64(0.9855305590657586), 'mean_ratio': np.float64(0.963339876654798), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.1s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.5s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.0s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.2s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.8s
+{'pm': 5, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 20, 'median_ratio': np.float64(0.983656090784041), 'mean_ratio': np.float64(0.9595062239134623), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.7s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.2s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.2s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.2s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.8s
+{'pm': 5, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 50, 'median_ratio': np.float64(0.9837258147514245), 'mean_ratio': np.float64(0.9527840484434952), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.4s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.8s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.9s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.9s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.1s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.2s
+{'pm': 20, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 10, 'median_ratio': np.float64(0.9809821339034048), 'mean_ratio': np.float64(0.9450981793501724), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.2s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.3s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.0s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.9s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.0s
+{'pm': 20, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 20, 'median_ratio': np.float64(0.9836732027435358), 'mean_ratio': np.float64(0.948507431907223), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 3.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.9s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 7.5s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.3s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.5s
+{'pm': 20, 'pc': 0.6, 'stagnation': 1, 'ls_steps': 50, 'median_ratio': np.float64(0.9773445734274828), 'mean_ratio': np.float64(0.9392889676554197), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.1s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.7s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.8s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.4s
+{'pm': 20, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 10, 'median_ratio': np.float64(0.9840960282342583), 'mean_ratio': np.float64(0.9532353778233653), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.0s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.7s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.2s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.4s
+{'pm': 20, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 20, 'median_ratio': np.float64(0.9773793730123914), 'mean_ratio': np.float64(0.9501659850805397), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.6s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.5s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.4s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.3s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.7s
+{'pm': 20, 'pc': 0.6, 'stagnation': 3, 'ls_steps': 50, 'median_ratio': np.float64(0.9800189706564237), 'mean_ratio': np.float64(0.9487575470935037), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 1.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.0s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.6s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.0s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 1.9s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.2s
+{'pm': 20, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 10, 'median_ratio': np.float64(0.98392879407684), 'mean_ratio': np.float64(0.9556762147197733), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.1s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.8s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.3s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.0s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.4s
+{'pm': 20, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 20, 'median_ratio': np.float64(0.9841638410958173), 'mean_ratio': np.float64(0.9570087226809151), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.4s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.1s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.7s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.2s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.3s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.3s
+{'pm': 20, 'pc': 0.6, 'stagnation': 6, 'ls_steps': 50, 'median_ratio': np.float64(0.9839505165324101), 'mean_ratio': np.float64(0.9518168214471557), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.3s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.0s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.3s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.5s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.0s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.6s
+{'pm': 20, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 10, 'median_ratio': np.float64(0.9771414138739848), 'mean_ratio': np.float64(0.9414035819276142), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.8s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 2.8s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 2.8s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.4s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.7s
+{'pm': 20, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 20, 'median_ratio': np.float64(0.9781837661368598), 'mean_ratio': np.float64(0.9462717376152313), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.9s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.2s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.3s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 5.2s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 4.4s
+{'pm': 20, 'pc': 0.9, 'stagnation': 1, 'ls_steps': 50, 'median_ratio': np.float64(0.9667373081865402), 'mean_ratio': np.float64(0.9456828312245131), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.2s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 7.3s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.5s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.5s
+{'pm': 20, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 10, 'median_ratio': np.float64(0.9851856349951988), 'mean_ratio': np.float64(0.956113047418913), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.3s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.4s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.1s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 8.0s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.6s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.7s
+{'pm': 20, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 20, 'median_ratio': np.float64(0.9782792460351282), 'mean_ratio': np.float64(0.9552272442138479), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 3.3s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.3s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.7s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 8.9s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 3.4s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 7.2s
+{'pm': 20, 'pc': 0.9, 'stagnation': 3, 'ls_steps': 50, 'median_ratio': np.float64(0.9796345305939176), 'mean_ratio': np.float64(0.9431050978135774), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.7s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.7s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.2s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 7.7s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.7s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 6.6s
+{'pm': 20, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 10, 'median_ratio': np.float64(0.9840594520122075), 'mean_ratio': np.float64(0.9676940948275496), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 3.0s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 4.9s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 8.0s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.7s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 6.7s
+{'pm': 20, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 20, 'median_ratio': np.float64(0.9832404754328736), 'mean_ratio': np.float64(0.967180442972774), 'n': 18}
+scenario 4 {'tasks': 500, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 4}: ok in 2.7s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 3.7s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 3.5s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 6.7s
+scenario 17 {'tasks': 500, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 17}: ok in 2.5s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 5.8s
+{'pm': 20, 'pc': 0.9, 'stagnation': 6, 'ls_steps': 50, 'median_ratio': np.float64(0.978771833859593), 'mean_ratio': np.float64(0.9450471562839693), 'n': 18}
+ pm  pc  stagnation  ls_steps  median_ratio  mean_ratio  n
+ 20 0.9           1        50      0.966737    0.945683 18
+  1 0.6           1        50      0.969659    0.935236 18
+  5 0.6           1        20      0.969701    0.941896 18
+  5 0.9           1        50      0.970561    0.949320 18
+  1 0.6           1        10      0.976530    0.939808 18
+  1 0.6           1        20      0.976752    0.940599 18
+ 20 0.9           1        10      0.977141    0.941404 18
+ 20 0.6           1        50      0.977345    0.939289 18
+ 20 0.6           3        20      0.977379    0.950166 18
+  5 0.9           1        20      0.978064    0.934638 18

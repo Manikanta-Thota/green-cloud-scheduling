@@ -1,0 +1,81 @@
+{
+  "instances": 2430,
+  "friedman_energy": {
+    "chi2": 8089.325102880663,
+    "p": 0.0
+  },
+  "friedman_hv": {
+    "chi2": 8048.892342700132,
+    "p": 0.0
+  },
+  "hpeas_energy_median": -3.0533484229336105,
+  "hpeas_energy_ci": [
+    -3.301957569622549,
+    -2.7102326431799884
+  ],
+  "hpeas_within_tolerance": 1.0,
+  "hpeas_accepted_saving": 1.0,
+  "scenarios_significant_saving": 81,
+  "scenarios_total": 81,
+  "hpeas_energy_by_tasks": {
+    "500": -6.685,
+    "2000": -2.536,
+    "5000": -1.551
+  },
+  "hpeas_accepted_by_tasks": {
+    "500": 1.0,
+    "2000": 1.0,
+    "5000": 1.0
+  },
+  "hpeas_energy_by_vms": {
+    "20": -2.157,
+    "50": -4.433,
+    "100": -2.869
+  },
+  "hpeas_accepted_by_vms": {
+    "20": 1.0,
+    "50": 1.0,
+    "100": 1.0
+  },
+  "hpeas_energy_by_heterogeneity": {
+    "high": -7.061,
+    "low": -1.306,
+    "medium": -2.977
+  },
+  "hpeas_accepted_by_heterogeneity": {
+    "high": 1.0,
+    "low": 1.0,
+    "medium": 1.0
+  },
+  "hpeas_energy_by_arrival": {
+    "bursty": -3.369,
+    "steady": -5.93,
+    "workflow": -0.987
+  },
+  "hpeas_accepted_by_arrival": {
+    "bursty": 1.0,
+    "steady": 1.0,
+    "workflow": 1.0
+  },
+  "carbon_g_per_run": {
+    "low": {
+      "reference": 56.36760624972246,
+      "hpeas": 53.58962091773881,
+      "saving": 1.3337143395257594
+    },
+    "medium": {
+      "reference": 338.2056374983348,
+      "hpeas": 321.5377255064329,
+      "saving": 8.002286037154555
+    },
+    "high": {
+      "reference": 789.1464874961146,
+      "hpeas": 750.2546928483433,
+      "saving": 18.672000753360628
+    }
+  },
+  "energy_kwh_median": {
+    "reference": 1.1273521249944491,
+    "hpeas": 1.0717924183547762
+  }
+}
