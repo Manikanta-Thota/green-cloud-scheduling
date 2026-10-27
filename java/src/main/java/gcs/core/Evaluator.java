@@ -1,88 +1,79 @@
 package gcs.core;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * Objective evaluation, kept identical to python/gcs/model.py (see the conventions there).
- * One task at a time per VM, queued in (arrival, index) order; hosts on during [0, makespan];
- * linear host power in the MIPS utilisation of the host's VMs.
+ * One task at a time per VM, queued in (arrival, rank, index) order; a task also waits for its
+ * predecessors. A host is on from the first start to the last finish of its tasks (hosts with no
+ * tasks stay off) and draws linear power in the MIPS utilisation of its VMs. Because the power model
+ * is linear, a host's energy is exactly pIdle * (on time) + joulesPerMi * (MI executed on it); the
+ * Python oracle integrates the same quantity event by event, which cross-checks this closed form.
  */
 public final class Evaluator {
     private Evaluator() {}
 
-    public static final class Sim {
-        public final double[] start, finish, busy;
-        Sim(int nTasks, int nVms) { start = new double[nTasks]; finish = new double[nTasks]; busy = new double[nVms]; }
+    public static final int ENERGY = 0, MAKESPAN = 1, COST = 2, IMBALANCE = 3, SLA = 4, N_OBJ = 5;
+
+    /** Reusable buffers holding the simulation state of the last evaluated assignment. */
+    public static final class Workspace {
+        public final double[] start, finish;        // per task
+        public final double[] free, busy;           // per VM: time it becomes free, busy seconds
+        public final double[] hostOn, hostOff, hostWork;   // per host
+        public Workspace(Instance in) {
+            start = new double[in.nTasks()]; finish = new double[in.nTasks()];
+            free = new double[in.nVms()]; busy = new double[in.nVms()];
+            hostOn = new double[in.nHosts()]; hostOff = new double[in.nHosts()]; hostWork = new double[in.nHosts()];
+        }
     }
 
-    public static Sim simulate(Instance in, int[] assign) {
-        int n = in.nTasks(), m = in.nVms();
-        if (assign.length != n) throw new IllegalArgumentException("invalid assignment");
-        for (int v : assign) if (v < 0 || v >= m) throw new IllegalArgumentException("invalid assignment");
-        Integer[] order = new Integer[n];
-        for (int i = 0; i < n; i++) order[i] = i;
-        Arrays.sort(order, Comparator.<Integer>comparingDouble(i -> in.arrival[i]).thenComparingInt(i -> i));
-        double[] free = new double[m];
-        Sim sim = new Sim(n, m);
-        for (int t : order) {
+    /** Evaluate into {@code out} (length N_OBJ) using {@code w} as scratch; w keeps the simulation state. */
+    public static void evaluate(Instance in, int[] assign, Workspace w, double[] out) {
+        int n = in.nTasks(), m = in.nVms(), nh = in.nHosts();
+        Arrays.fill(w.free, 0.0);
+        Arrays.fill(w.busy, 0.0);
+        Arrays.fill(w.hostOn, Double.POSITIVE_INFINITY);
+        Arrays.fill(w.hostOff, Double.NEGATIVE_INFINITY);
+        Arrays.fill(w.hostWork, 0.0);
+        double makespan = 0;
+        int late = 0;
+        for (int t : in.order) {
             int v = assign[t];
-            double s = Math.max(in.arrival[t], free[v]);
-            double d = in.exec(t, v);
-            sim.start[t] = s; sim.finish[t] = s + d;
-            free[v] = s + d; sim.busy[v] += d;
+            double ready = in.arrival[t];
+            for (int p : in.preds[t]) if (w.finish[p] > ready) ready = w.finish[p];
+            double s = Math.max(ready, w.free[v]);
+            double d = in.length[t] / in.mips[v];
+            double f = s + d;
+            w.start[t] = s; w.finish[t] = f;
+            w.free[v] = f; w.busy[v] += d;
+            int h = in.hostOf[v];
+            if (s < w.hostOn[h]) w.hostOn[h] = s;
+            if (f > w.hostOff[h]) w.hostOff[h] = f;
+            w.hostWork[h] += in.length[t];
+            if (f > makespan) makespan = f;
+            if (f > in.deadline[t] + 1e-9) late++;
         }
-        return sim;
+        double energy = 0;
+        for (int h = 0; h < nh; h++)
+            if (w.hostWork[h] > 0) energy += in.pIdle[h] * (w.hostOff[h] - w.hostOn[h]) + in.joulesPerMi[h] * w.hostWork[h];
+        double cost = 0, sumB = 0;
+        for (int v = 0; v < m; v++) { cost += in.price[v] * w.busy[v]; sumB += w.busy[v]; }
+        // imbalance = coefficient of variation of utilisation busy/makespan; the makespan cancels out
+        double meanB = sumB / m, var = 0;
+        for (int v = 0; v < m; v++) var += (w.busy[v] - meanB) * (w.busy[v] - meanB);
+        out[ENERGY] = energy;
+        out[MAKESPAN] = makespan;
+        out[COST] = cost;
+        out[IMBALANCE] = meanB > 0 ? Math.sqrt(var / m) / meanB : 0;
+        out[SLA] = (double) late / n;
     }
 
     public static Objectives evaluate(Instance in, int[] assign) {
-        Sim sim = simulate(in, assign);
-        int n = in.nTasks(), m = in.nVms();
-        double makespan = 0;
-        for (double f : sim.finish) makespan = Math.max(makespan, f);
-
-        double sumU = 0;
-        double[] util = new double[m];
-        for (int v = 0; v < m; v++) { util[v] = makespan > 0 ? sim.busy[v] / makespan : 0; sumU += util[v]; }
-        double meanU = sumU / m, var = 0;
-        for (double u : util) var += (u - meanU) * (u - meanU);
-        double imbalance = meanU > 0 ? Math.sqrt(var / m) / meanU : 0;
-
-        double cost = 0;
-        for (int v = 0; v < m; v++) cost += in.price[v] * sim.busy[v];
-
-        int late = 0;
-        for (int t = 0; t < n; t++) if (sim.finish[t] > in.deadline[t] + 1e-9) late++;
-
-        return new Objectives(energy(in, assign, sim, makespan), makespan, cost, imbalance, (double) late / n);
-    }
-
-    private static double energy(Instance in, int[] assign, Sim sim, double makespan) {
-        int nHosts = in.pIdle.length;
-        double[] cap = new double[nHosts];
-        for (int v = 0; v < in.nVms(); v++) cap[in.hostOf[v]] += in.mips[v];
-        // events per host: {time, +/- mips}
-        java.util.List<java.util.List<double[]>> events = new java.util.ArrayList<>();
-        for (int h = 0; h < nHosts; h++) events.add(new java.util.ArrayList<>());
-        for (int t = 0; t < in.nTasks(); t++) {
-            int v = assign[t], h = in.hostOf[v];
-            events.get(h).add(new double[] {sim.start[t], +in.mips[v]});
-            events.get(h).add(new double[] {sim.finish[t], -in.mips[v]});
-        }
-        double total = 0;
-        for (int h = 0; h < nHosts; h++) {
-            events.get(h).sort(Comparator.<double[]>comparingDouble(e -> e[0]).thenComparingDouble(e -> e[1]));
-            double busyMips = 0, prev = 0, span = in.pMax[h] - in.pIdle[h];
-            for (double[] e : events.get(h)) {
-                if (e[0] > prev) {
-                    double u = cap[h] > 0 ? busyMips / cap[h] : 0;
-                    total += (in.pIdle[h] + span * u) * (e[0] - prev);
-                    prev = e[0];
-                }
-                busyMips += e[1];
-            }
-            if (makespan > prev) total += in.pIdle[h] * (makespan - prev);
-        }
-        return total;
+        int m = in.nVms();
+        if (assign.length != in.nTasks()) throw new IllegalArgumentException("invalid assignment");
+        for (int v : assign) if (v < 0 || v >= m) throw new IllegalArgumentException("invalid assignment");
+        double[] o = new double[N_OBJ];
+        evaluate(in, assign, new Workspace(in), o);
+        return new Objectives(o[ENERGY], o[MAKESPAN], o[COST], o[IMBALANCE], o[SLA]);
     }
 }

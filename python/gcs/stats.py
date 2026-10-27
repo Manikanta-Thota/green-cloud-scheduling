@@ -1,4 +1,4 @@
-"""Statistical analysis (proposal Section 3.5): Friedman, Holm-corrected Wilcoxon, Cliff's delta,
+"""Statistical analysis (proposal Section 3.5): Friedman, Holm correction, Cliff's delta,
 bootstrap CIs and the practical-tolerance decision rule."""
 from __future__ import annotations
 import numpy as np
@@ -21,17 +21,6 @@ def holm_adjust(pvals) -> np.ndarray:
         running = max(running, (m - rank) * p[idx])
         adj[idx] = min(1.0, running)
     return adj
-
-
-def pairwise_wilcoxon_holm(samples: dict[str, np.ndarray]) -> list[dict]:
-    names = list(samples)
-    pairs = [(a, b) for i, a in enumerate(names) for b in names[i + 1:]]
-    raw = []
-    for a, b in pairs:
-        diff = np.asarray(samples[a]) - np.asarray(samples[b])
-        raw.append(1.0 if np.all(diff == 0) else float(stats.wilcoxon(samples[a], samples[b]).pvalue))
-    adj = holm_adjust(raw)
-    return [{"a": a, "b": b, "p_raw": r, "p_holm": float(h)} for (a, b), r, h in zip(pairs, raw, adj)]
 
 
 def cliffs_delta(x, y) -> float:

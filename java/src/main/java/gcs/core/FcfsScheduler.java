@@ -1,28 +1,27 @@
 package gcs.core;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
-/** Tasks in arrival order; each goes to the VM that can start it earliest (lowest index on ties). */
+/**
+ * Tasks in execution order (arrival, rank, index); each goes to the VM that can start it earliest
+ * (lowest index on ties). A workflow task becomes ready when its predecessors have finished.
+ */
 public final class FcfsScheduler implements Scheduler {
     @Override public String name() { return "fcfs"; }
 
     @Override public int[] schedule(Instance in) {
         int n = in.nTasks(), m = in.nVms();
-        Integer[] order = new Integer[n];
-        for (int i = 0; i < n; i++) order[i] = i;
-        Arrays.sort(order, Comparator.<Integer>comparingDouble(i -> in.arrival[i]).thenComparingInt(i -> i));
-        double[] free = new double[m];
+        double[] free = new double[m], finish = new double[n];
         int[] assign = new int[n];
-        for (int t : order) {
+        for (int t : in.order) {
+            double ready = in.arrival[t];
+            for (int p : in.preds[t]) ready = Math.max(ready, finish[p]);
             int best = 0;
-            double bestStart = Math.max(in.arrival[t], free[0]);
+            double bestStart = Math.max(ready, free[0]);
             for (int v = 1; v < m; v++) {
-                double s = Math.max(in.arrival[t], free[v]);
+                double s = Math.max(ready, free[v]);
                 if (s < bestStart) { bestStart = s; best = v; }
             }
             assign[t] = best;
-            free[best] = bestStart + in.exec(t, best);
+            finish[t] = free[best] = bestStart + in.exec(t, best);
         }
         return assign;
     }
