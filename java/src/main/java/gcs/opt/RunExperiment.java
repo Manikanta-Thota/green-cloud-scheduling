@@ -2,17 +2,23 @@ package gcs.opt;
 
 import gcs.core.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.security.MessageDigest;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * Runs a set of algorithms on every case file in a directory and writes one CSV row per
- * (instance, algorithm, selection rule), plus convergence traces. Called by python/gcs/experiment.py.
+ * (instance, algorithm, selection rule), plus convergence traces and, optionally, the selected
+ * schedules. Called by python/gcs/experiment.py. With --order-seed, instances and algorithms run in a
+ * seeded random order; the output keeps file and algorithm order either way.
  *
  * <pre>
  * java -cp java/out gcs.opt.RunExperiment --in DIR --out runs.csv --trace trace.csv
  *      --algos fcfs,minmin,ga,mogwo,hpeas --budget 10000 --threads 8 [--param key=value ...] [--fronts DIR]
+ *      [--schedules schedules.csv.gz --config-hash HEX] [--order-seed N]
  * </pre>
  */
 public final class RunExperiment {
@@ -34,39 +40,51 @@ public final class RunExperiment {
         Path frontsDir = a.containsKey("fronts") ? Path.of(a.get("fronts")) : null;
         if (frontsDir != null) Files.createDirectories(frontsDir);
         Params p = new Params(prm);
+        Long orderSeed = a.containsKey("order-seed") ? Long.parseLong(a.get("order-seed")) : null;
+        String configHash = a.getOrDefault("config-hash", "");
 
         List<String> metaKeys = new ArrayList<>(CaseFile.read(files.get(0)).meta.keySet());
         try (PrintWriter out = new PrintWriter(Files.newBufferedWriter(Path.of(a.get("out"))));
-             PrintWriter trace = new PrintWriter(Files.newBufferedWriter(Path.of(a.get("trace"))))) {
+             PrintWriter trace = new PrintWriter(Files.newBufferedWriter(Path.of(a.get("trace"))));
+             PrintWriter sched = a.containsKey("schedules") ? new PrintWriter(new OutputStreamWriter(
+                     new GZIPOutputStream(Files.newOutputStream(Path.of(a.get("schedules")))), StandardCharsets.UTF_8)) : null) {
             out.println(String.join(",", metaKeys) + ",algorithm,selection," + String.join(",", OBJ)
                     + ",cv,feasible,evaluations,runtime_s,front_size,hv,igd,spacing");
             StringBuilder th = new StringBuilder(String.join(",", metaKeys) + ",algorithm");
             for (int k = 1; k <= Problem.TRACE_POINTS; k++) th.append(",t").append(k);
             trace.println(th);
+            if (sched != null) sched.println("scenario_id,rep,algorithm,selection,seed,config_hash,schedule_sha256,assignment");
 
+            List<Path> submitOrder = new ArrayList<>(files);
+            if (orderSeed != null) Collections.shuffle(submitOrder, new Random(orderSeed));
             ExecutorService pool = Executors.newFixedThreadPool(threads);
-            List<Future<String[]>> jobs = new ArrayList<>();
-            for (Path f : files) jobs.add(pool.submit(() -> runCase(f, metaKeys, algos, budget, p, frontsDir)));
-            for (Future<String[]> j : jobs) {
-                String[] res = j.get();
+            Map<Path, Future<String[]>> jobs = new HashMap<>();
+            for (Path f : submitOrder)
+                jobs.put(f, pool.submit(() -> runCase(f, metaKeys, algos, budget, p, frontsDir, orderSeed, configHash)));
+            for (Path f : files) {
+                String[] res = jobs.get(f).get();
                 out.print(res[0]);
                 trace.print(res[1]);
                 out.flush();
                 trace.flush();
+                if (sched != null) sched.print(res[2]);
             }
             pool.shutdown();
         }
     }
 
     static String[] runCase(Path file, List<String> metaKeys, List<String> algos, int budget, Params p,
-                            Path frontsDir) throws IOException {
+                            Path frontsDir, Long orderSeed, String configHash) throws IOException {
         CaseFile c = CaseFile.read(file);
         StringBuilder metaCols = new StringBuilder();
         for (String k : metaKeys) metaCols.append(c.meta.getOrDefault(k, "")).append(',');
-        Map<String, List<Solution>> fronts = new LinkedHashMap<>();
-        Map<String, double[]> runInfo = new LinkedHashMap<>();
-        StringBuilder traces = new StringBuilder();
-        for (String algo : algos) {
+        Map<String, List<Solution>> results = new HashMap<>();
+        Map<String, double[]> infos = new HashMap<>();
+        Map<String, double[]> traceOf = new HashMap<>();
+        Map<String, Long> seedOf = new HashMap<>();
+        List<String> execOrder = new ArrayList<>(algos);
+        if (orderSeed != null) Collections.shuffle(execOrder, new Random(orderSeed ^ file.getFileName().toString().hashCode()));
+        for (String algo : execOrder) {
             long seed = c.seeds.getOrDefault(algo, (long) (file.getFileName().toString() + algo).hashCode());
             SplittableRandom rng = new SplittableRandom(seed);
             long t0 = System.nanoTime();
@@ -79,15 +97,26 @@ public final class RunExperiment {
             };
             double secs = (System.nanoTime() - t0) / 1e9;
             prob.closeTrace();
-            fronts.put(algo, result);
+            results.put(algo, result);
+            seedOf.put(algo, seed);
             boolean heuristic = algo.equals("fcfs") || algo.equals("minmin") || algo.equals("energy_greedy");
-            runInfo.put(algo, new double[] {heuristic ? (algo.equals("energy_greedy") ? 1 : 0) : prob.evaluations(), secs});
-            if (!heuristic) {
+            infos.put(algo, new double[] {heuristic ? (algo.equals("energy_greedy") ? 1 : 0) : prob.evaluations(), secs});
+            if (!heuristic) traceOf.put(algo, prob.trace);
+        }
+        // from here on, configured algorithm order (the reference front and output rows depend on it)
+        Map<String, List<Solution>> fronts = new LinkedHashMap<>();
+        Map<String, double[]> runInfo = new LinkedHashMap<>();
+        StringBuilder traces = new StringBuilder();
+        for (String algo : algos) {
+            fronts.put(algo, results.get(algo));
+            runInfo.put(algo, infos.get(algo));
+            if (traceOf.containsKey(algo)) {
                 traces.append(metaCols).append(algo);
-                for (double v : prob.trace) traces.append(',').append(v);
+                for (double v : traceOf.get(algo)) traces.append(',').append(v);
                 traces.append('\n');
             }
         }
+        StringBuilder schedules = new StringBuilder();
 
         // reference front: non-dominated union of every algorithm's points; normalise by its ideal/nadir
         List<double[]> all = new ArrayList<>();
@@ -120,6 +149,10 @@ public final class RunExperiment {
                 rows.append(',').append(x.cv).append(',').append(x.feasible() ? 1 : 0)
                     .append(',').append((long) info[0]).append(',').append(info[1])
                     .append(',').append(s.size()).append(',').append(hv).append(',').append(igd).append(',').append(sp).append('\n');
+                String assignment = assignment(x.x);
+                schedules.append(c.meta.getOrDefault("scenario_id", "")).append(',').append(c.meta.getOrDefault("rep", ""))
+                    .append(',').append(algo).append(',').append(e.getKey()).append(',').append(seedOf.get(algo))
+                    .append(',').append(configHash).append(',').append(sha256(assignment)).append(',').append(assignment).append('\n');
             }
             if (frontsDir != null) {
                 try (PrintWriter w = new PrintWriter(Files.newBufferedWriter(
@@ -134,7 +167,21 @@ public final class RunExperiment {
             }
         }
         System.err.println("done " + file.getFileName());
-        return new String[] {rows.toString(), traces.toString()};
+        return new String[] {rows.toString(), traces.toString(), schedules.toString()};
+    }
+
+    /** VM index of each task, space-separated (task order of the case file). */
+    static String assignment(int[] x) {
+        StringBuilder b = new StringBuilder(x.length * 3);
+        for (int i = 0; i < x.length; i++) { if (i > 0) b.append(' '); b.append(x[i]); }
+        return b.toString();
+    }
+
+    static String sha256(String s) {
+        try {
+            byte[] h = MessageDigest.getInstance("SHA-256").digest(s.getBytes(StandardCharsets.US_ASCII));
+            return HexFormat.of().formatHex(h);
+        } catch (java.security.NoSuchAlgorithmException e) { throw new IllegalStateException(e); }
     }
 
     static List<double[]> normalise(List<double[]> pts, double[] lo, double[] hi) {

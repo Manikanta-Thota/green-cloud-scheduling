@@ -33,7 +33,7 @@ LABEL = {"fcfs": "FCFS", "minmin": "Min-Min", "ga": "GA", "mogwo": "MOGWO", "hpe
          "mogwo_seeded": "MOGWO + seeding", "energy_greedy": "Energy-greedy"}
 INSTANCE = ["scenario_id", "rep"]
 
-# reference palette (dataviz skill): HPEAS highlighted in slot-1 blue, everything else neutral ink
+# HPEAS in blue, every other method in neutral grey
 HIGHLIGHT, NEUTRAL, INK, MUTED, GRID = "#2a78d6", "#8a8984", "#0b0b0b", "#52514e", "#e4e3df"
 plt.rcParams.update({"font.size": 9, "axes.edgecolor": MUTED, "axes.labelcolor": INK, "xtick.color": MUTED,
                      "ytick.color": MUTED, "axes.spines.top": False, "axes.spines.right": False,
@@ -267,7 +267,7 @@ def main(argv=None):
     res["hpeas_within_tolerance"] = float(h.accepted.mean())
     res["hpeas_accepted_saving"] = float(h.saving_accepted.mean())
     per = []
-    for sid, g in d[d.algorithm.isin(["hpeas"])].groupby("scenario_id"):
+    for sid, g in h.groupby("scenario_id"):
         diff = g.energy - g.ref_energy
         p = 1.0 if np.allclose(diff, 0) else float(sps.wilcoxon(g.energy, g.ref_energy, alternative="less").pvalue)
         b = bootstrap_ci(g.energy_chg.values, resamples=2000, seed=sid)

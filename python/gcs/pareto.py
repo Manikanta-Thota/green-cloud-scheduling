@@ -78,8 +78,3 @@ def igd(F, reference_front) -> float:
     F, R = np.asarray(F, dtype=float), np.asarray(reference_front, dtype=float)
     d = np.linalg.norm(R[:, None, :] - F[None, :, :], axis=2)
     return float(d.min(axis=1).mean())
-
-
-def normalise(F, ideal, nadir) -> np.ndarray:
-    F, ideal, nadir = (np.asarray(a, dtype=float) for a in (F, ideal, nadir))
-    return (F - ideal) / np.where(nadir - ideal == 0, 1.0, nadir - ideal)
