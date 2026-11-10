@@ -2,6 +2,19 @@
 
 Versions follow [Semantic Versioning](https://semver.org/). Each release is a git tag (`vX.Y.Z`).
 
+## [1.2.1] - 2026-11-10
+### Changed
+- Documentation aligned with the supervisor's comments on the methodology (protocol D14): the
+  workload description names the public workflow sources (WfInstances,
+  LGPL v3.0, Montage and Epigenomics only; Pegasus WorkflowGenerator, no licence), states that neither
+  is used, and describes how the generated workflows are modified and scaled; Coleman et al. (2022)
+  added to the references.
+- The run-time pilot is treated as a project-plan activity (milestone M4): the methodology
+  now calls the tuning-seed workload check a calibration run (section 3.2 "Workload calibration and
+  parameter tuning").
+- No code under `python/gcs` or `java/src`, configuration or result changed, so the source hash stored
+  with `results/main` still matches.
+
 ## [1.2.0] - 2026-10-28
 ### Added
 - Per-run provenance promised in proposal §3.4 (protocol D13): every selected schedule (assignment

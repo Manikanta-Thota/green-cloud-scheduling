@@ -43,7 +43,8 @@ normalisation) is reported as a sensitivity check.
   mean phase length 150 inter-arrival times.
 * *Workflow*: a Poisson stream of DAGs shaped like Montage, CyberShake, Epigenomics and Inspiral
   (Bharathi et al., 2008; Juve et al., 2013) with 20-100 tasks each; illustrative relative task weights
-  with lognormal noise, scaled to the same mean task length and offered load.
+  with lognormal noise, scaled to the same mean task length and offered load. No external trace or
+  generator file is used (D7, D14).
 * Instance seed = `SeedSequence([master_seed, 1, scenario, replicate])`, identical for every algorithm
   (common random numbers). Algorithm seed = `SeedSequence([master_seed, 2, scenario, replicate,
   algorithm index])`. Tuning uses a different master seed (777) and never touches test seeds.
@@ -100,10 +101,11 @@ reference evaluations) and share population size 40 and archive size 100.
 | D4 | "No VM performs more than one task" | One task at a time per VM, FIFO queue. |
 | D5 | Billing | Per second of busy time; price super-linear in speed (exponent 1.3), otherwise cost would be identical for every schedule. |
 | D6 | Garbled tolerance wording | Makespan +5%, cost +5%, SLA +1 pp, relative to the faster deterministic baseline. |
-| D7 | Workflow workloads | Synthetic DAG generator following published structures (not real traces). |
+| D7 | Workflow workloads | Synthetic DAG generator following published structures (not real traces). Sources checked 10 Nov 2026: WfInstances (https://github.com/wfcommons/WfInstances, LGPL v3.0, WfFormat 1.6, no tagged release) has Pegasus traces for Montage and Epigenomics only; the Pegasus WorkflowGenerator (https://github.com/pegasus-isi/WorkflowGenerator) states no licence and is unmaintained. Neither is downloaded or redistributed. |
 | D8 | Gantt task name "Hybrid GSCOA implementation" | Report refers to "HPEAS implementation". |
-| D9 | Workload stress | Bursts made independent of run length (MMPP). Pilot on tuning seeds: median FCFS SLA violation 0% steady, 3-26% bursty, 23-35% workflow. |
-| D10 | Full factorial vs sample | Full factorial: the pilot showed 12 algorithms x 2,430 instances fit in under an hour on 8 cores. |
+| D9 | Workload stress | Bursts made independent of run length (MMPP). Calibration run on tuning seeds: median FCFS SLA violation 0% steady, 3-26% bursty, 23-35% workflow. |
+| D10 | Full factorial vs sample | Full factorial: the run-time pilot (a project-plan activity, milestone M4, not part of the method) showed 12 algorithms x 2,430 instances fit in under an hour on 8 cores. |
 | D11 | Tuning | Grid on six development scenarios x 3 tuning replicates, scored by median in-envelope energy ratio; see `results/tuning/`. GA tuned separately (`ga_pm`, `ga_pc`). |
 | D12 | Tolerance sensitivity defect | `--param tol_*` was overwritten by the configured tolerances, so the first tol_tight / tol_loose runs used the default envelope (results identical to `default` apart from run time). Fixed in `experiment.py`; both variants re-run; default runs verified identical to the golden baseline after the fix; the invalid runs are kept in `results/sensitivity_invalid_tol`. |
 | D13 | Provenance and run order (proposal 3.4 gaps) | Every selected schedule (assignment vector, its SHA-256, algorithm seed) is stored in `sNN_schedules.csv.gz`; the run configuration (config file, algorithms, budget, parameters, seed stream, SHA-256 of the Java and Python sources) is written to `config_<hash>.json` and its hash is stored with every schedule and every `run_log.csv` attempt. Scenarios, instances and algorithms execute in a seeded random order (`--order-seed`, default the master seed; position logged); outputs keep canonical order. Regression on 4 scenarios x 2 replicates x 12 methods: run rows identical except `runtime_s`, traces byte-identical, stored schedules re-evaluate to the reported objectives with the Python oracle. Main experiment re-run with these features into `results/main`; the earlier run is kept as `results/main_v1` for comparison. |
+| D14 | Supervisor feedback on the methodology (Research_Report_MK, Nov 2026) | Workflow data sources, licences, versions, access dates and the modification and scaling of the generated workflows are stated in the report (D7). The run-time pilot belongs to the project plan (proposal 3.8, milestone M4), not the method: the report's methodology calls the tuning-seed workload check a calibration run (D9). Documentation and report text only; no code, configuration or result changed. |
