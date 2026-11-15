@@ -1,88 +1,132 @@
 """Seeded workload generator (proposal Section 3.3).
 
-Two families:
-* independent tasks with steady (Poisson) or bursty arrivals;
-* scientific workflows: a stream of DAGs whose shapes follow Montage, CyberShake, Epigenomics and
-  Inspiral (LIGO) as characterised by Bharathi et al. (2008) and Juve et al. (2013). The relative task
-  weights are illustrative approximations of those characterisations, not measured traces.
+Both families come from published datasets (protocol D15, D16); nothing is generated except the
+simulated data centre, the deadlines and the random choices:
+* independent tasks: windows of consecutive jobs from two cleaned Parallel Workloads Archive logs,
+  HPC2N-2002-2.2-cln and NASA-iPSC-1993-3.1-cln (Feitelson et al., 2014), listed with SHA-256 in
+  data/joblogs_manifest.csv. A job's length is its recorded runtime; its arrival is its recorded submit
+  time, rescaled in time to the configured load. "Steady" and "bursty" are the windows whose
+  inter-arrival times are least and most irregular (lowest and highest third of the coefficient of
+  variation over all windows of that size in that log);
+* scientific workflows taken from published execution traces: real Pegasus runs of Montage,
+  Epigenomics, Seismology and 1000Genome on the Chameleon testbed from the WfInstances repository of
+  the WfCommons project (Coleman et al., 2022; LGPL v3.0). The 73 trace files, their commit and
+  SHA-256 are listed in data/wfinstances_manifest.csv and fetched by python/fetch_traces.py
+  (protocol D15). Tasks and dependencies are used unchanged; recorded runtimes become task lengths.
 
 Infrastructure: VMs with heterogeneous MIPS packed onto hosts; host power figures come from the
 configured power profile; VM price grows super-linearly with speed so that cost depends on placement.
 """
 from __future__ import annotations
+import csv
+import json
 import math
+import os
+from functools import lru_cache
 import numpy as np
 from .model import Instance
 
-# ---------------------------------------------------------------- workflow shapes
-# Each builder returns (weights, preds) for one workflow of roughly `size` tasks.
+# ---------------------------------------------------------------- published workflow traces
 
-def _montage(size, rng):
-    k = max(3, (size - 3) // 4)
-    w, preds = [], []
-    def add(weight, ps):
-        w.append(weight); preds.append(list(ps)); return len(w) - 1
-    proj = [add(1.7, []) for _ in range(k)]                                  # mProjectPP
-    diffs = [add(0.7, [proj[i], proj[j]]) for i in range(k) for j in (i + 1, i + 2) if j < k]   # mDiffFit
-    concat = add(11.0, diffs)                                                  # mConcatFit
-    bg = add(14.0, [concat])                                                   # mBgModel
-    back = [add(1.7, [bg, proj[i]]) for i in range(k)]                         # mBackground
-    tbl = add(2.8, back)                                                       # mImgtbl
-    madd = add(14.0, [tbl])                                                    # mAdd
-    shrink = add(4.0, [madd])                                                  # mShrink
-    add(0.7, [shrink])                                                         # mJPEG
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+TRACE_DIR = os.path.join(ROOT, "data", "wfinstances")
+TRACE_MANIFEST = os.path.join(ROOT, "data", "wfinstances_manifest.csv")
+LOG_DIR = os.path.join(ROOT, "data", "joblogs")
+LOG_MANIFEST = os.path.join(ROOT, "data", "joblogs_manifest.csv")
+
+
+@lru_cache(maxsize=None)
+def trace_catalogue() -> dict:
+    """{application: [(file, n_tasks), ...]} from the committed manifest, sorted for reproducibility."""
+    cat = {}
+    with open(TRACE_MANIFEST, encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            cat.setdefault(r["application"], []).append((r["file"], int(r["tasks"])))
+    return {app: sorted(v) for app, v in sorted(cat.items())}
+
+
+@lru_cache(maxsize=None)
+def load_trace(app: str, name: str, min_runtime_s: float) -> tuple:
+    """(runtimes in seconds, predecessor lists) of one WfFormat trace, tasks in topological order.
+
+    Runtimes recorded as 0 (below the measurement resolution) are raised to `min_runtime_s`."""
+    path = os.path.join(TRACE_DIR, app, name)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"{path} missing: run python/fetch_traces.py first")
+    with open(path, encoding="utf-8") as f:
+        wf = json.load(f)["workflow"]
+    tasks = wf["specification"]["tasks"]
+    runtime = {t["id"]: float(t["runtimeInSeconds"]) for t in wf["execution"]["tasks"]}
+    key = {t["id"]: t["id"] for t in tasks}
+    key.update({t["name"]: t["id"] for t in tasks})
+    idx = {t["id"]: i for i, t in enumerate(tasks)}
+    parents = [[idx[key[q]] for q in t.get("parents", [])] for t in tasks]
+    # Kahn's algorithm, ties broken by file order, so predecessors always come first
+    n = len(tasks)
+    indeg = [len(ps) for ps in parents]
+    children = [[] for _ in range(n)]
+    for i, ps in enumerate(parents):
+        for q in ps:
+            children[q].append(i)
+    ready, order = [i for i in range(n) if indeg[i] == 0], []
+    while ready:
+        i = ready.pop(0)
+        order.append(i)
+        for c in children[i]:
+            indeg[c] -= 1
+            if indeg[c] == 0:
+                ready.append(c)
+    if len(order) != n:
+        raise ValueError(f"{name}: dependency cycle")
+    pos = {old: new for new, old in enumerate(order)}
+    w = tuple(max(runtime[tasks[i]["id"]], min_runtime_s) for i in order)
+    preds = tuple(tuple(sorted(pos[q] for q in parents[i])) for i in order)
     return w, preds
 
 
-def _cybershake(size, rng):
-    k = max(2, (size - 4) // 2)
-    w, preds = [110.0, 110.0], [[], []]                                        # ExtractSGT x2
-    seis = []
-    for i in range(k):
-        w.append(40.0); preds.append([i % 2]); seis.append(len(w) - 1)         # SeismogramSynthesis
-    peak = []
-    for s in seis:
-        w.append(1.0); preds.append([s]); peak.append(len(w) - 1)              # PeakValCalc
-    w.append(25.0); preds.append(list(seis))                                   # ZipSeis
-    w.append(20.0); preds.append(list(peak))                                   # ZipPSA
-    return w, preds
+# ---------------------------------------------------------------- published job logs
+
+@lru_cache(maxsize=None)
+def log_catalogue() -> tuple:
+    """((log name, file), ...) from the committed manifest, sorted for reproducibility."""
+    with open(LOG_MANIFEST, encoding="utf-8") as f:
+        return tuple(sorted((r["log"], r["file"]) for r in csv.DictReader(f)))
 
 
-def _epigenomics(size, rng):
-    k = max(2, (size - 4) // 4)
-    w, preds = [35.0], [[]]                                                    # fastQSplit
-    maps = []
-    for _ in range(k):
-        prev = 0
-        for weight in (2.5, 0.5, 1.4, 60.0):        # filterContams, sol2sanger, fastq2bfq, map
-            w.append(weight); preds.append([prev]); prev = len(w) - 1
-        maps.append(prev)
-    w.append(11.0); preds.append(maps)                                         # mapMerge
-    w.append(43.0); preds.append([len(w) - 2])                                 # maqIndex
-    w.append(55.0); preds.append([len(w) - 2])                                 # pileup
-    return w, preds
+@lru_cache(maxsize=None)
+def job_log(log: str) -> tuple:
+    """(submit times, runtimes) in seconds of the jobs of one Standard Workload Format log whose recorded
+    runtime is positive, in submit order."""
+    import gzip
+    name = dict(log_catalogue())[log]
+    path = os.path.join(LOG_DIR, name)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"{path} missing: download it as described in python/fetch_traces.py")
+    with gzip.open(path, "rt", encoding="latin-1") as f:
+        rows = [line.split() for line in f if line.strip() and not line.startswith(";")]
+    submit = np.array([float(r[1]) for r in rows])
+    run = np.array([float(r[3]) for r in rows])
+    keep = run > 0
+    order = np.argsort(submit[keep], kind="stable")
+    return submit[keep][order], run[keep][order]
 
 
-def _inspiral(size, rng):
-    k = max(4, int(size / 4.5))
-    g = max(1, k // 4)
-    groups = np.array_split(np.arange(k), g)
-    w, preds = [], []
-    def add(weight, ps):
-        w.append(weight); preds.append(list(ps)); return len(w) - 1
-    bank = [add(18.0, []) for _ in range(k)]                                   # TmpltBank
-    insp = [add(460.0, [bank[i]]) for i in range(k)]                           # Inspiral
-    thinca = [add(5.4, [insp[i] for i in grp]) for grp in groups]              # Thinca
-    gid = {int(i): j for j, grp in enumerate(groups) for i in grp}
-    trig = [add(5.1, [thinca[gid[i]]]) for i in range(k)]                      # TrigBank
-    insp2 = [add(460.0, [trig[i]]) for i in range(k)]                          # Inspiral (second pass)
-    for grp in groups:
-        add(5.4, [insp2[i] for i in grp])                                      # Thinca (second pass)
-    return w, preds
-
-
-WORKFLOW_SHAPES = {"montage": _montage, "cybershake": _cybershake, "epigenomics": _epigenomics,
-                   "inspiral": _inspiral}
+@lru_cache(maxsize=None)
+def window_starts(log: str, n: int, arrival: str, q_lo: float, q_hi: float) -> np.ndarray:
+    """Start indices of the n-job windows of `log` whose inter-arrival coefficient of variation lies in the
+    lowest (steady) or highest (bursty) part of its distribution over all n-job windows of that log."""
+    submit, _ = job_log(log)
+    gaps = np.diff(submit)
+    c1 = np.concatenate([[0.0], np.cumsum(gaps)])
+    c2 = np.concatenate([[0.0], np.cumsum(gaps * gaps)])
+    starts = np.arange(len(submit) - n + 1)
+    m = n - 1                                               # gaps inside a window
+    s1, s2 = c1[starts + m] - c1[starts], c2[starts + m] - c2[starts]
+    mean = s1 / m
+    var = np.maximum(s2 / m - mean * mean, 0.0)
+    cv = np.sqrt(var) / np.where(mean > 0, mean, np.inf)
+    lo, hi = np.quantile(cv, [q_lo, q_hi])
+    return starts[cv <= lo] if arrival == "steady" else starts[cv >= hi]
 
 
 def _depth_and_path(weights, preds):
@@ -90,7 +134,7 @@ def _depth_and_path(weights, preds):
     n = len(weights)
     depth = np.zeros(n, dtype=int)
     path = np.zeros(n)
-    for t in range(n):          # builders emit tasks in topological order
+    for t in range(n):          # tasks are in topological order
         if preds[t]:
             depth[t] = 1 + max(depth[p] for p in preds[t])
             path[t] = weights[t] + max(path[p] for p in preds[t])
@@ -122,18 +166,21 @@ def generate(cfg: dict, scenario: dict, seed: np.random.SeedSequence, power_prof
     if scenario["arrival"] == "workflow":
         return _workflow_instance(cfg, scenario, rng, mips, price, host_of, p_idle, p_max)
     n = scenario["tasks"]
-
-    mu = math.log(p["task_length_mean_mi"]) - 0.5 * p["task_length_sigma"] ** 2   # lognormal with the stated mean
-    length = rng.lognormal(mu, p["task_length_sigma"], size=n)
-
-    # offered load = datacentre_load * total capacity -> mean arrival rate
-    rate = p["datacentre_load"] * mips.sum() / p["task_length_mean_mi"]            # tasks per second
-    if scenario["arrival"] == "steady":
-        arrival = np.cumsum(rng.exponential(1.0 / rate, size=n))
-    elif scenario["arrival"] == "bursty":
-        arrival = _mmpp_arrivals(n, rate, p["bursty"], rng)
-    else:
+    if scenario["arrival"] not in ("steady", "bursty"):
         raise ValueError(scenario["arrival"])
+    q_lo, q_hi = p["joblog_window_quantiles"]
+    logs = [name for name, _ in log_catalogue()]
+    log = logs[rng.integers(len(logs))]
+    starts = window_starts(log, n, scenario["arrival"], q_lo, q_hi)
+    s0 = int(starts[rng.integers(len(starts))])
+    submit, run = job_log(log)
+    w = run[s0:s0 + n] * p["trace_reference_mips"]                         # MI at the reference speed
+    length = w * (p["task_length_mean_mi"] / w.mean())                      # one common factor per instance
+
+    # recorded submit times, rescaled in time so that the offered load is datacentre_load * capacity
+    t = submit[s0:s0 + n] - submit[s0]
+    horizon = length.sum() / (p["datacentre_load"] * mips.sum())
+    arrival = t * (horizon / t[-1]) if t[-1] > 0 else np.zeros(n)
 
     k = rng.uniform(*p["deadline_slack_range"], size=n)
     deadline = arrival + k * length / mips.mean()
@@ -141,47 +188,32 @@ def generate(cfg: dict, scenario: dict, seed: np.random.SeedSequence, power_prof
                     host_of=host_of, p_idle=p_idle, p_max=p_max)
 
 
-def _mmpp_arrivals(n, rate, b, rng) -> np.ndarray:
-    """Two-phase Markov-modulated Poisson process with mean rate `rate`: burst phases at
-    peak_factor * rate alternate with quiet phases at (2 - peak_factor) * rate; phase lengths are
-    exponential with a mean of `phase_mean_arrivals` mean inter-arrival times, so burst size does not
-    depend on the number of tasks."""
-    hi, lo = b["peak_factor"] * rate, (2.0 - b["peak_factor"]) * rate
-    mean_phase = b["phase_mean_arrivals"] / rate
-    out, t, burst = [], 0.0, bool(rng.integers(2))
-    while len(out) < n:
-        end = t + rng.exponential(mean_phase)
-        lam = hi if burst else lo
-        while True:
-            t += rng.exponential(1.0 / lam)
-            if t >= end:
-                break
-            out.append(t)
-        t, burst = end, not burst
-    return np.array(out[:n])
-
-
 def _workflow_instance(cfg, scenario, rng, mips, price, host_of, p_idle, p_max) -> Instance:
-    """A Poisson stream of workflows totalling exactly `tasks` tasks (a remainder smaller than the
-    minimum workflow size is filled with independent tasks)."""
+    """A Poisson stream of published workflow traces totalling exactly `tasks` tasks.
+
+    Each draw picks an application at random among those with a trace that still fits, then one of its
+    fitting traces; a remainder smaller than every trace is filled with jobs drawn from a job log."""
     p = cfg["fixed_parameters"]
     n = scenario["tasks"]
-    lo_size, hi_size = p["workflow_size_range"]
-    names = sorted(WORKFLOW_SHAPES)
+    ref_mips, min_rt = p["trace_reference_mips"], p["workflow_trace_min_runtime_s"]
+    logs = [name for name, _ in log_catalogue()]
+    cat = trace_catalogue()
     weights, preds, rank, path, wf_of = [], [], [], [], []
     n_wf = 0
     while len(weights) < n:
         room = n - len(weights)
-        if room < lo_size:
-            w, ps = [1.0] * room, [[] for _ in range(room)]
-        else:
-            name = names[rng.integers(len(names))]
-            w, ps = WORKFLOW_SHAPES[name](int(rng.integers(lo_size, hi_size + 1)), rng)
-            if len(w) > room:   # too big for the remaining room: rebuild at the room's size, else fill
-                w, ps = WORKFLOW_SHAPES[name](room, rng)
-                if len(w) > room:
-                    w, ps = [1.0] * room, [[] for _ in range(room)]
-        w = np.asarray(w) * rng.lognormal(0.0, 0.3, size=len(w))
+        fits = {app: [f for f, k in files if k <= room] for app, files in cat.items()}
+        apps = [a for a in fits if fits[a]]
+        if apps:
+            app = apps[rng.integers(len(apps))]
+            name = fits[app][rng.integers(len(fits[app]))]
+            rt, ps = load_trace(app, name, min_rt)
+            w = np.asarray(rt) * ref_mips                       # million instructions at the reference speed
+            ps = [list(q) for q in ps]
+        else:                                                   # filler: jobs drawn from a job log
+            _, run = job_log(logs[rng.integers(len(logs))])
+            w = run[rng.integers(len(run), size=room)] * ref_mips
+            ps = [[] for _ in range(room)]
         d, pth = _depth_and_path(w, ps)
         base = len(weights)
         singletons = all(not q for q in ps)
@@ -191,7 +223,7 @@ def _workflow_instance(cfg, scenario, rng, mips, price, host_of, p_idle, p_max) 
             wf_of.append(n_wf + (t if singletons else 0))
         n_wf += len(w) if singletons else 1
     weights, path, wf_of = np.array(weights), np.array(path), np.array(wf_of)
-    scale = p["task_length_mean_mi"] / weights.mean()
+    scale = p["task_length_mean_mi"] / weights.mean()          # one common factor: relative runtimes kept
     length, path = weights * scale, path * scale
 
     # workflows arrive as a Poisson process; offered load = datacentre_load * total capacity

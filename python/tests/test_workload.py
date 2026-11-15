@@ -55,15 +55,40 @@ class WorkloadTests(unittest.TestCase):
             self.assertTrue(np.all(inst.deadline > inst.arrival))
             self.assertAlmostEqual(inst.length.mean(), self.cfg["fixed_parameters"]["task_length_mean_mi"], places=6)
 
-    def test_bursty_arrivals_mean_rate(self):
-        sc = next(m for m in self.matrix if m["arrival"] == "bursty" and m["tasks"] == 5000 and m["vms"] == 20)
-        inst = generate(self.cfg, sc, instance_seed(self.cfg, sc["scenario_id"], 0))
+    def test_job_log_instances_keep_offered_load_and_mean_length(self):
         p = self.cfg["fixed_parameters"]
-        rate = p["datacentre_load"] * inst.mips.sum() / p["task_length_mean_mi"]
-        self.assertEqual(inst.n_tasks, 5000)
-        self.assertAlmostEqual(inst.n_tasks / inst.arrival[-1] / rate, 1.0, delta=0.15)
-        gaps = np.diff(inst.arrival)
-        self.assertGreater(gaps.std() / gaps.mean(), 1.2)   # burstier than Poisson (coefficient of variation 1)
+        for arrival in ("steady", "bursty"):
+            sc = next(m for m in self.matrix if m["arrival"] == arrival and m["tasks"] == 5000 and m["vms"] == 20)
+            inst = generate(self.cfg, sc, instance_seed(self.cfg, sc["scenario_id"], 0))
+            self.assertEqual(inst.n_tasks, 5000)
+            self.assertAlmostEqual(inst.length.mean(), p["task_length_mean_mi"], places=6)
+            load = inst.length.sum() / inst.arrival[-1] / inst.mips.sum()
+            self.assertAlmostEqual(load, p["datacentre_load"], places=9)
+
+    def test_bursty_windows_more_irregular_than_steady(self):
+        cv = {}
+        for arrival in ("steady", "bursty"):
+            sc = next(m for m in self.matrix if m["arrival"] == arrival and m["tasks"] == 2000 and m["vms"] == 50)
+            vals = []
+            for r in range(10):
+                gaps = np.diff(generate(self.cfg, sc, instance_seed(self.cfg, sc["scenario_id"], r)).arrival)
+                vals.append(gaps.std() / gaps.mean())
+            cv[arrival] = np.median(vals)
+        self.assertGreater(cv["bursty"], cv["steady"])
+
+    def test_job_lengths_are_one_rescaled_window_of_a_log(self):
+        from gcs.workload import job_log, log_catalogue
+        n = 500
+        sc = next(m for m in self.matrix if m["arrival"] == "steady" and m["tasks"] == n)
+        inst = generate(self.cfg, sc, instance_seed(self.cfg, sc["scenario_id"], 3))
+        rel = inst.length / inst.length[0]
+        found = False
+        for log, _ in log_catalogue():
+            submit, run = job_log(log)
+            self.assertTrue(np.all(run > 0) and np.all(np.diff(submit) >= 0))
+            cand = np.flatnonzero(np.isclose(run[1:len(run) - n + 1] / run[:len(run) - n], rel[1], rtol=1e-9))
+            found = found or any(np.allclose(run[s:s + n] / run[s], rel, rtol=1e-9) for s in cand)
+        self.assertTrue(found, "instance lengths are not one rescaled window of a job log")
 
     def test_price_grows_faster_than_speed(self):
         inst = generate(self.cfg, self.matrix[2], instance_seed(self.cfg, 2, 0))

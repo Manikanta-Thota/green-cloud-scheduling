@@ -1,0 +1,3 @@
+log,file,jobs,jobs_used,sha256,source,accessed
+hpc2n,HPC2N-2002-2.2-cln.swf.gz,202871,202871,3c534857d6065cfd9cc35aac8d064c9c17172be7acf336de835006f43a626e64,https://www.cs.huji.ac.il/labs/parallel/workload/l_hpc2n/HPC2N-2002-2.2-cln.swf.gz,2026-11-10
+nasa_ipsc,NASA-iPSC-1993-3.1-cln.swf.gz,18239,18066,5589ae9b2fb78e3bf92de097497cf33a91607de1ad54563e43533f7827597f29,https://www.cs.huji.ac.il/labs/parallel/workload/l_nasa_ipsc/NASA-iPSC-1993-3.1-cln.swf.gz,2026-11-10

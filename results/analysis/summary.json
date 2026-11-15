@@ -1,26 +1,26 @@
 {
   "instances": 2430,
   "friedman_energy": {
-    "chi2": 8089.325102880663,
+    "chi2": 6789.370205761319,
     "p": 0.0
   },
   "friedman_hv": {
-    "chi2": 8048.892342700132,
+    "chi2": 6331.0067238581105,
     "p": 0.0
   },
-  "hpeas_energy_median": -3.0533484229336105,
+  "hpeas_energy_median": -8.134177018453126,
   "hpeas_energy_ci": [
-    -3.301957569622549,
-    -2.7102326431799884
+    -8.572913319400843,
+    -7.627922075403759
   ],
   "hpeas_within_tolerance": 1.0,
   "hpeas_accepted_saving": 1.0,
   "scenarios_significant_saving": 81,
   "scenarios_total": 81,
   "hpeas_energy_by_tasks": {
-    "500": -6.685,
-    "2000": -2.536,
-    "5000": -1.551
+    "500": -15.26,
+    "2000": -7.439,
+    "5000": -4.089
   },
   "hpeas_accepted_by_tasks": {
     "500": 1.0,
@@ -28,9 +28,9 @@
     "5000": 1.0
   },
   "hpeas_energy_by_vms": {
-    "20": -2.157,
-    "50": -4.433,
-    "100": -2.869
+    "20": -4.353,
+    "50": -9.365,
+    "100": -9.594
   },
   "hpeas_accepted_by_vms": {
     "20": 1.0,
@@ -38,9 +38,9 @@
     "100": 1.0
   },
   "hpeas_energy_by_heterogeneity": {
-    "high": -7.061,
-    "low": -1.306,
-    "medium": -2.977
+    "high": -10.33,
+    "low": -3.902,
+    "medium": -8.528
   },
   "hpeas_accepted_by_heterogeneity": {
     "high": 1.0,
@@ -48,9 +48,9 @@
     "medium": 1.0
   },
   "hpeas_energy_by_arrival": {
-    "bursty": -3.369,
-    "steady": -5.93,
-    "workflow": -0.987
+    "bursty": -6.072,
+    "steady": -6.309,
+    "workflow": -15.24
   },
   "hpeas_accepted_by_arrival": {
     "bursty": 1.0,
@@ -59,23 +59,23 @@
   },
   "carbon_g_per_run": {
     "low": {
-      "reference": 56.36760624972246,
-      "hpeas": 53.58962091773881,
-      "saving": 1.3337143395257594
+      "reference": 61.54266647786595,
+      "hpeas": 57.73406244860286,
+      "saving": 3.411655246582279
     },
     "medium": {
-      "reference": 338.2056374983348,
-      "hpeas": 321.5377255064329,
-      "saving": 8.002286037154555
+      "reference": 369.2559988671957,
+      "hpeas": 346.40437469161714,
+      "saving": 20.469931479493674
     },
     "high": {
-      "reference": 789.1464874961146,
-      "hpeas": 750.2546928483433,
-      "saving": 18.672000753360628
+      "reference": 861.5973306901233,
+      "hpeas": 808.2768742804401,
+      "saving": 47.763173452151904
     }
   },
   "energy_kwh_median": {
-    "reference": 1.1273521249944491,
-    "hpeas": 1.0717924183547762
+    "reference": 1.230853329557319,
+    "hpeas": 1.1546812489720573
   }
 }

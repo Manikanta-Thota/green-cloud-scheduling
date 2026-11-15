@@ -35,12 +35,11 @@ fixed_parameters:
   vm_price_per_second_at_1000_mips: 1.4e-5   # about 0.05 currency units per hour
   vm_price_exponent: 1.3       # price grows faster than speed, so cost depends on placement
   task_length_mean_mi: 50000
-  task_length_sigma: 0.8       # lognormal sigma (independent tasks)
   deadline_slack_range: [3.0, 10.0]   # deadline = arrival + k * critical-path length / mean VM MIPS
-  workflow_size_range: [20, 100]      # tasks per workflow
-  bursty:                      # two-phase MMPP (calibrated in the pilot, protocol D9)
-    peak_factor: 1.8           # burst rate = 1.8 x mean, quiet rate = 0.2 x mean
-    phase_mean_arrivals: 150   # mean phase length, in mean inter-arrival times
+  trace_reference_mips: 1000   # published logs and traces: length (MI) = recorded runtime x this speed (D15, D16)
+  workflow_trace_min_runtime_s: 0.003 # runtimes recorded as 0 raised to the smallest recorded runtime (D15)
+  joblog_window_quantiles: [0.3333333333, 0.6666666667]  # steady = windows with inter-arrival CV in the
+                               # lowest third of that log's windows, bursty = highest third (D16)
   heterogeneity_mips_range:
     low: [900, 1100]
     medium: [500, 1500]
@@ -59,13 +58,13 @@ search:                        # frozen after tuning on tuning seeds (results/tu
   pop: 40                      # population / pack size
   archive: 100                 # external archive size
   pc: 0.9                      # crossover probability
-  pm: 20                       # expected number of genes mutated per child
+  pm: 1                        # expected number of genes mutated per child (v2.0 tuning, D16)
   stagnation: 1                # generations without energy progress before local search (adaptive)
   ls_members: 3                # archive members improved per local-search phase
-  ls_steps: 50                 # moves per member
+  ls_steps: 20                 # moves per member (v2.0 tuning, D16)
   static_period: 5             # generations between local-search phases (static ablation)
-  ga_pm: 20                    # GA tuned separately (results/tuning/tuning_ga.csv)
-  ga_pc: 0.9
+  ga_pm: 1                     # GA tuned separately (results/tuning/tuning_ga.csv; v2.0, D16)
+  ga_pc: 0.6
 
 decision_rules:                # proposal Section 3.5
   max_makespan_degradation: 0.05     # relative to the reference baseline (faster of FCFS and Min-Min)

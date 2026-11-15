@@ -1,0 +1,7 @@
+scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed
+4,1,ok,2.9,10000,fcfs|minmin|hpeas,3,777
+42,1,ok,3.2,10000,fcfs|minmin|hpeas,3,777
+38,1,ok,3.3,10000,fcfs|minmin|hpeas,3,777
+76,1,ok,5.2,10000,fcfs|minmin|hpeas,3,777
+17,1,ok,2.8,10000,fcfs|minmin|hpeas,3,777
+54,1,ok,4.4,10000,fcfs|minmin|hpeas,3,777

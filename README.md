@@ -26,7 +26,8 @@ Without `make`, run the module commands shown in the `Makefile` from the `python
 | `config/experiment.yaml` | Frozen experiment definition: factors, seeds, power profiles, search settings, tolerances. |
 | `docs/protocol.md` | The proposal turned into exact rules; decisions log. |
 | `python/gcs/model.py` | Reference oracle: objective evaluation with event-by-event energy integration. |
-| `python/gcs/workload.py`, `scenarios.py` | Seeded workloads (steady, bursty MMPP, workflow DAGs); 81-scenario matrix; common random numbers. |
+| `python/gcs/workload.py`, `scenarios.py` | Seeded workloads (steady and bursty: windows of published Parallel Workloads Archive job logs; workflows: published WfInstances traces); 81-scenario matrix; common random numbers. |
+| `python/fetch_traces.py`, `data/wfinstances_manifest.csv` | Downloads the 73 WfInstances workflow traces (pinned commit, LGPL v3.0, not redistributed) and verifies them against the committed SHA-256 manifest; also verifies the two job logs listed in `data/joblogs_manifest.csv`, which must be downloaded by hand in a browser (the archive blocks scripted downloads). Run once before any experiment. |
 | `python/gcs/baselines.py` | FCFS and Min-Min (precedence-aware), used for parity tests. |
 | `python/gcs/experiment.py` | Orchestration with checkpointing, retry and run log; calls the Java runner. |
 | `python/gcs/tune.py`, `sensitivity.py` | Tuning grid; sensitivity, tolerance and power-curve experiments. |

@@ -1,0 +1,2 @@
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 28.0s
+FRONTS_DONE

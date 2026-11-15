@@ -2,6 +2,24 @@
 
 Versions follow [Semantic Versioning](https://semver.org/). Each release is a git tag (`vX.Y.Z`).
 
+## [2.0.0] - 2026-11-14
+### Changed
+- Workloads are published data, not generated (protocol D15, D16): workflow scenarios use 73
+  WfInstances traces (Montage, Epigenomics, Seismology, 1000Genome; fetched at a pinned commit by
+  `python/fetch_traces.py`, listed in `data/wfinstances_manifest.csv`); steady and bursty scenarios use
+  windows of the HPC2N-2002 and NASA-iPSC-1993 logs from the Parallel Workloads Archive
+  (`data/joblogs_manifest.csv`, with SHA-256 and access date). CyberShake and Inspiral have no published
+  traces and are replaced. Only the data centre, deadlines and random choices remain generated.
+- Configuration: `workflow_size_range`, `task_length_sigma` and `bursty` removed;
+  `trace_reference_mips`, `workflow_trace_min_runtime_s` and `joblog_window_quantiles` added.
+- GA and HPEAS re-tuned on the tuning seeds and frozen before the test runs (HPEAS pm 1, ls_steps 20;
+  GA ga_pm 1, ga_pc 0.6).
+- All experiments re-run: main (81 scenarios x 30 replicates, config hash `fe8cc50d3ffb`, no failed
+  attempt), example fronts, CloudSim Plus validation (108/108 agree), sensitivity and power-curve runs,
+  analysis. The headline median energy saving of HPEAS changed from 3.1% to 8.1%; it is now
+  largest for workflows instead of smallest. v1.2.1 outputs are kept in `results/*_v2`.
+- Windows run commands added to `README.md`. `python/demo.py` added: runs FCFS, Min-Min and HPEAS on one scenario and prints the comparison.
+
 ## [1.2.1] - 2026-11-10
 ### Changed
 - Documentation aligned with the supervisor's comments on the methodology (protocol D14): the
