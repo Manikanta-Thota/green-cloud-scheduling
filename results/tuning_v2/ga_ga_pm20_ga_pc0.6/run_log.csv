@@ -1,0 +1,7 @@
+scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed
+4,1,ok,1.0,10000,fcfs|minmin|ga,3,777
+42,1,ok,1.7,10000,fcfs|minmin|ga,3,777
+38,1,ok,2.3,10000,fcfs|minmin|ga,3,777
+76,1,ok,3.8,10000,fcfs|minmin|ga,3,777
+17,1,ok,1.0,10000,fcfs|minmin|ga,3,777
+54,1,ok,3.6,10000,fcfs|minmin|ga,3,777

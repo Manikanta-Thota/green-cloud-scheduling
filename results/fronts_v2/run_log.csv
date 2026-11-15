@@ -1,0 +1,2 @@
+scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed
+76,1,ok,28.0,10000,fcfs|minmin|energy_greedy|ga|mogwo|hpeas,1,20261018

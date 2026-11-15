@@ -1,0 +1,154 @@
+{
+ "algorithms": [
+  "fcfs",
+  "minmin",
+  "hpeas"
+ ],
+ "budget": 10000,
+ "config": {
+  "ablations": [
+   "hpeas_noseed",
+   "hpeas_nols",
+   "hpeas_static",
+   "nsga2"
+  ],
+  "algorithms": [
+   "fcfs",
+   "minmin",
+   "ga",
+   "mogwo",
+   "hpeas"
+  ],
+  "decision_rules": {
+   "alpha": 0.05,
+   "bootstrap_resamples": 10000,
+   "carbon_intensity_g_per_kwh": {
+    "high": 700,
+    "low": 50,
+    "medium": 300
+   },
+   "max_cost_increase": 0.05,
+   "max_makespan_degradation": 0.05,
+   "max_sla_increase_pp": 1.0
+  },
+  "experiment": {
+   "master_seed": 777,
+   "name": "hpeas-green-cloud-v1",
+   "replications": 30,
+   "tuning_seed": 777
+  },
+  "fixed_parameters": {
+   "datacentre_load": 0.7,
+   "deadline_slack_range": [
+    3.0,
+    10.0
+   ],
+   "heterogeneity_mips_range": {
+    "high": [
+     250,
+     2500
+    ],
+    "low": [
+     900,
+     1100
+    ],
+    "medium": [
+     500,
+     1500
+    ]
+   },
+   "joblog_window_quantiles": [
+    0.3333333333,
+    0.6666666667
+   ],
+   "power_profile": "specpower_2008",
+   "task_length_mean_mi": 50000,
+   "trace_reference_mips": 1000,
+   "vm_price_exponent": 1.3,
+   "vm_price_per_second_at_1000_mips": 1.4e-05,
+   "vms_per_host": 4,
+   "workflow_trace_min_runtime_s": 0.003
+  },
+  "power_profiles": {
+   "proportional": {
+    "p_idle_w": [
+     60.0,
+     66.0
+    ],
+    "p_max_w": [
+     200.0,
+     220.0
+    ]
+   },
+   "specpower_2008": {
+    "p_idle_w": [
+     86.0,
+     93.7
+    ],
+    "p_max_w": [
+     117.0,
+     135.0
+    ]
+   }
+  },
+  "scenario_factors": {
+   "arrival": [
+    "steady",
+    "bursty",
+    "workflow"
+   ],
+   "heterogeneity": [
+    "low",
+    "medium",
+    "high"
+   ],
+   "tasks": [
+    500,
+    2000,
+    5000
+   ],
+   "vms": [
+    20,
+    50,
+    100
+   ]
+  },
+  "search": {
+   "archive": 100,
+   "budget": 10000,
+   "ga_pc": 0.9,
+   "ga_pm": 20,
+   "ls_members": 3,
+   "ls_steps": 50,
+   "pc": 0.9,
+   "pm": 20,
+   "pop": 40,
+   "stagnation": 1,
+   "static_period": 5
+  },
+  "supplementary": [
+   "energy_greedy",
+   "ga_seeded",
+   "mogwo_seeded"
+  ]
+ },
+ "params": {
+  "archive": 100,
+  "ga_pc": 0.9,
+  "ga_pm": 20,
+  "ls_members": 3,
+  "ls_steps": "50",
+  "pc": "0.9",
+  "pm": "20",
+  "pop": 40,
+  "stagnation": "6",
+  "static_period": 5,
+  "tol_cost": 0.05,
+  "tol_makespan": 0.05,
+  "tol_sla": 0.01
+ },
+ "power_profile": "specpower_2008",
+ "reps": 3,
+ "seed_stream": "tuning",
+ "source_sha256": "e91cc06af61658064ef402d571432c20e45e75a421657a15aaa370123906f96a"
+}

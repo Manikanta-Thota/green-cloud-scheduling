@@ -1,7 +1,7 @@
-scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed
-4,1,ok,3.0,10000,fcfs|minmin|hpeas,3,777
-42,1,ok,4.3,10000,fcfs|minmin|hpeas,3,777
-38,1,ok,3.6,10000,fcfs|minmin|hpeas,3,777
-76,1,ok,5.6,10000,fcfs|minmin|hpeas,3,777
-17,1,ok,2.7,10000,fcfs|minmin|hpeas,3,777
-54,1,ok,4.7,10000,fcfs|minmin|hpeas,3,777
+scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed,config_hash,order_seed,order_position
+4,1,ok,2.7,10000,fcfs|minmin|hpeas,3,777,c150dab33abfa5a9b8d09feb7b641d4a264b4766343510350529d29e2e4fc55b,777,0
+38,1,ok,4.2,10000,fcfs|minmin|hpeas,3,777,c150dab33abfa5a9b8d09feb7b641d4a264b4766343510350529d29e2e4fc55b,777,1
+54,1,ok,6.0,10000,fcfs|minmin|hpeas,3,777,c150dab33abfa5a9b8d09feb7b641d4a264b4766343510350529d29e2e4fc55b,777,2
+17,1,ok,2.9,10000,fcfs|minmin|hpeas,3,777,c150dab33abfa5a9b8d09feb7b641d4a264b4766343510350529d29e2e4fc55b,777,3
+76,1,ok,6.9,10000,fcfs|minmin|hpeas,3,777,c150dab33abfa5a9b8d09feb7b641d4a264b4766343510350529d29e2e4fc55b,777,4
+42,1,ok,4.3,10000,fcfs|minmin|hpeas,3,777,c150dab33abfa5a9b8d09feb7b641d4a264b4766343510350529d29e2e4fc55b,777,5

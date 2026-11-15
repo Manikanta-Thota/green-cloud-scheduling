@@ -13,3 +13,7 @@ results/**/*.part
 results/analysis_dry/
 results/analysis/deployed.csv
 
+# Published WfInstances traces: fetched by python/fetch_traces.py, not redistributed (protocol D15)
+data/wfinstances/
+# Parallel Workloads Archive job logs: downloaded by hand (scripted downloads are blocked), not redistributed (protocol D16)
+data/joblogs/

@@ -1,2 +1,2 @@
-scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed
-76,1,ok,28.0,10000,fcfs|minmin|energy_greedy|ga|mogwo|hpeas,1,20261018
+scenario_id,attempt,status,seconds,budget,algorithms,reps,master_seed,config_hash,order_seed,order_position
+76,1,ok,14.4,10000,fcfs|minmin|energy_greedy|ga|mogwo|hpeas,1,20261018,d203b6ce61d3e532311d57a8b6a78a99d56d831788837caabb8db2cc19988126,20261018,0

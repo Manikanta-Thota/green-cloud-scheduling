@@ -1,0 +1,190 @@
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 39: done, skipping
+scenario 40: done, skipping
+scenario 41: done, skipping
+scenario 66: done, skipping
+scenario 67: done, skipping
+scenario 68: done, skipping
+scenario 0: done, skipping
+scenario 1: done, skipping
+scenario 2: done, skipping
+scenario 3: done, skipping
+scenario 4: done, skipping
+scenario 5: done, skipping
+scenario 6: done, skipping
+scenario 7: done, skipping
+scenario 8: done, skipping
+scenario 9: done, skipping
+scenario 10: done, skipping
+scenario 11: done, skipping
+scenario 12: done, skipping
+scenario 13: done, skipping
+scenario 14: done, skipping
+scenario 15: done, skipping
+scenario 16: done, skipping
+scenario 17: done, skipping
+scenario 18: done, skipping
+scenario 19: done, skipping
+scenario 20: done, skipping
+scenario 21: done, skipping
+scenario 22: done, skipping
+scenario 23: done, skipping
+scenario 24: done, skipping
+scenario 25: done, skipping
+scenario 26: done, skipping
+scenario 27: done, skipping
+scenario 28: done, skipping
+scenario 29: done, skipping
+scenario 30 {'tasks': 2000, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'steady', 'scenario_id': 30}: ok in 39.8s
+scenario 31 {'tasks': 2000, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 31}: ok in 38.4s
+scenario 32 {'tasks': 2000, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'workflow', 'scenario_id': 32}: ok in 37.8s
+scenario 33 {'tasks': 2000, 'vms': 20, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 33}: ok in 34.7s
+scenario 34 {'tasks': 2000, 'vms': 20, 'heterogeneity': 'high', 'arrival': 'bursty', 'scenario_id': 34}: ok in 35.4s
+scenario 35 {'tasks': 2000, 'vms': 20, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 35}: ok in 39.7s
+scenario 36 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 36}: ok in 34.0s
+scenario 37 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'bursty', 'scenario_id': 37}: ok in 29.2s
+scenario 38 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 38}: ok in 24.2s
+scenario 39 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'medium', 'arrival': 'steady', 'scenario_id': 39}: ok in 23.8s
+scenario 40 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 40}: ok in 34.0s
+scenario 41 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'medium', 'arrival': 'workflow', 'scenario_id': 41}: ok in 34.3s
+scenario 42 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 42}: ok in 36.8s
+scenario 43 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'bursty', 'scenario_id': 43}: ok in 39.3s
+scenario 44 {'tasks': 2000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 44}: ok in 36.0s
+scenario 45 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 45}: ok in 35.9s
+scenario 46 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'low', 'arrival': 'bursty', 'scenario_id': 46}: ok in 34.5s
+scenario 47 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 47}: ok in 26.1s
+scenario 48 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'steady', 'scenario_id': 48}: ok in 26.6s
+scenario 49 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 49}: ok in 21.5s
+scenario 50 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'workflow', 'scenario_id': 50}: ok in 28.9s
+scenario 51 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 51}: ok in 26.6s
+scenario 52 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'high', 'arrival': 'bursty', 'scenario_id': 52}: ok in 25.7s
+scenario 53 {'tasks': 2000, 'vms': 100, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 53}: ok in 23.8s
+scenario 54 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 54}: ok in 42.3s
+scenario 55 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'bursty', 'scenario_id': 55}: ok in 39.8s
+scenario 56 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 56}: ok in 33.3s
+scenario 57 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'steady', 'scenario_id': 57}: ok in 43.1s
+scenario 58 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 58}: ok in 43.1s
+scenario 59 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'medium', 'arrival': 'workflow', 'scenario_id': 59}: ok in 49.0s
+scenario 60 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 60}: ok in 45.4s
+scenario 61 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'high', 'arrival': 'bursty', 'scenario_id': 61}: ok in 34.1s
+scenario 62 {'tasks': 5000, 'vms': 20, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 62}: ok in 64.3s
+scenario 63 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 63}: ok in 57.5s
+scenario 64 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'bursty', 'scenario_id': 64}: ok in 60.3s
+scenario 65 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 65}: ok in 57.2s
+scenario 66 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'medium', 'arrival': 'steady', 'scenario_id': 66}: ok in 46.6s
+scenario 67 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 67}: ok in 35.5s
+scenario 68 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'medium', 'arrival': 'workflow', 'scenario_id': 68}: ok in 35.4s
+scenario 69 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 69}: ok in 36.5s
+scenario 70 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'bursty', 'scenario_id': 70}: ok in 34.8s
+scenario 71 {'tasks': 5000, 'vms': 50, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 71}: ok in 30.8s
+scenario 72 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'low', 'arrival': 'steady', 'scenario_id': 72}: ok in 31.5s
+scenario 73 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'low', 'arrival': 'bursty', 'scenario_id': 73}: ok in 31.6s
+scenario 74 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'low', 'arrival': 'workflow', 'scenario_id': 74}: ok in 32.7s
+scenario 75 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'steady', 'scenario_id': 75}: ok in 33.1s
+scenario 76 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'bursty', 'scenario_id': 76}: ok in 31.0s
+scenario 77 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'medium', 'arrival': 'workflow', 'scenario_id': 77}: ok in 29.3s
+scenario 78 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'high', 'arrival': 'steady', 'scenario_id': 78}: ok in 32.9s
+scenario 79 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'high', 'arrival': 'bursty', 'scenario_id': 79}: ok in 31.6s
+scenario 80 {'tasks': 5000, 'vms': 100, 'heterogeneity': 'high', 'arrival': 'workflow', 'scenario_id': 80}: ok in 31.3s
+exit 0
