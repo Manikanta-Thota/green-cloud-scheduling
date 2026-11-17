@@ -19,6 +19,30 @@ make analysis         # tables, statistics and figures
 
 Without `make`, run the module commands shown in the `Makefile` from the `python/` directory.
 
+### Windows (PowerShell, no `make`)
+
+From the repository root:
+```powershell
+python -m venv .venv; .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+New-Item -ItemType Directory -Force java\out | Out-Null
+javac -d java\out (Get-ChildItem java\src\main\java\gcs\core\*.java, java\src\main\java\gcs\opt\*.java).FullName
+java -cp java\out gcs.core.SelfCheck testdata\parity_case.txt
+java -cp java\out gcs.opt.OptSelfCheck testdata\parity_workflow_case.txt
+```
+From `python\`:
+```powershell
+..\.venv\Scripts\python.exe -m unittest discover -s tests          # 31 tests, last line OK
+..\.venv\Scripts\python.exe fetch_traces.py                        # once, before any experiment
+..\.venv\Scripts\python.exe demo.py                                # FCFS, Min-Min, HPEAS on one scenario (~40 s)
+..\.venv\Scripts\python.exe -m gcs.experiment --out ..\results\main
+..\.venv\Scripts\python.exe -m gcs.analysis --main ..\results\main --out ..\results\analysis --figures ..\results\figures --front ..\results\fronts\fronts --front-stem s76_r00
+..\.venv\Scripts\python.exe -m gcs.validate_cloudsim                # needs the CloudSim Plus jars in java\lib (Makefile: cloudsim-lib)
+```
+One CloudSim Plus case, from `python\` (after one `gcs.validate_cloudsim` run has compiled `java\out-sim`):
+```powershell
+java -cp "..\java\out-sim;..\java\lib\*" gcs.sim.CloudSimValidation ..\testdata\parity_case.txt
+```
+
 ## Layout
 
 | Path | Purpose |
