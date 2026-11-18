@@ -4,9 +4,11 @@ Every algorithm's deployed schedule is compared, instance by instance, with the 
 (the faster of FCFS and Min-Min on that instance). Changes are relative (energy, makespan, cost) or in
 percentage points (SLA). "Accepted" means inside the tolerance envelope: makespan +5%, cost +5%,
 SLA +1 pp. Statistics: Friedman across algorithms, Holm-corrected Wilcoxon signed-rank against HPEAS,
-Cliff's delta, bootstrap 95% CIs of medians.
+Cliff's delta, bootstrap 95% CIs of medians. The H0/H1 decision of Section 3.5 is made per scenario
+against the lowest-energy non-energy-aware or single-metaheuristic baseline (hypothesis_tests.csv).
 
     python -m gcs.analysis --main ../results/main --out ../results/analysis --figures ../results/figures
+    python -m gcs.analysis --main ../results/main --out ../results/analysis --hypothesis-only
 """
 from __future__ import annotations
 import argparse
@@ -21,7 +23,7 @@ import numpy as np
 import pandas as pd
 
 from .scenarios import load_config
-from .stats import bootstrap_ci, cliffs_delta, friedman, holm_adjust
+from .stats import bootstrap_ci, cliffs_delta, friedman, holm_adjust, practical_acceptance
 from scipy import stats as sps
 
 MAIN = ["fcfs", "minmin", "ga", "mogwo", "hpeas"]
@@ -48,6 +50,18 @@ def colour(a):
 def load(dirpath: str, kind: str = "runs") -> pd.DataFrame:
     files = sorted(glob.glob(os.path.join(dirpath, f"s*_{kind}.csv")))
     return pd.concat((pd.read_csv(f) for f in files), ignore_index=True)
+
+
+def check_complete(runs: pd.DataFrame, cfg: dict) -> None:
+    """Section 3.3: every algorithm-scenario-replicate combination present, every objective value finite."""
+    algos = set(runs.algorithm)
+    want = len(set(runs.scenario_id)) * cfg["experiment"]["replications"] * len(algos)
+    have = runs[runs.selection.isin(["tcme", "single"])].groupby(INSTANCE + ["algorithm"]).ngroups
+    if have != want:
+        raise SystemExit(f"incomplete results: {have} of {want} algorithm-scenario-replicate combinations")
+    obj = runs[["energy", "makespan", "cost", "imbalance", "sla"]].to_numpy(dtype=float)
+    if not np.isfinite(obj).all():
+        raise SystemExit("non-finite objective values in the results")
 
 
 def deployed(df: pd.DataFrame, selection: str = "tcme") -> pd.DataFrame:
@@ -105,6 +119,60 @@ def tests_vs(d: pd.DataFrame, metric: str, ref: str, others) -> pd.DataFrame:
     for r, p in zip(rows, holm_adjust(raw)):
         r["p_holm"] = float(p)
     return pd.DataFrame(rows)
+
+
+def _wilcoxon(x, y, alternative: str) -> float:
+    x, y = np.asarray(x, dtype=float), np.asarray(y, dtype=float)
+    return 1.0 if np.allclose(x - y, 0) else float(sps.wilcoxon(x, y, alternative=alternative).pvalue)
+
+
+def hypothesis_tests(d: pd.DataFrame, rules: dict, candidate: str = "hpeas",
+                     references=("fcfs", "minmin", "ga"), secondary: str = "mogwo"):
+    """H0/H1 decision of Section 3.5, scenario by scenario.
+
+    The primary reference baseline of a scenario is the non-energy-aware or single-metaheuristic method
+    (FCFS, Min-Min or GA) with the lowest median energy in that scenario; MOGWO is the secondary comparison.
+    H1 holds in a scenario when HPEAS's energy is significantly lower (one-sided Wilcoxon signed-rank on the
+    30 paired replicates, Holm-corrected across scenarios), its median makespan and cost are at most 5% above
+    the reference's medians, its median SLA violation rate is at most one percentage point above, and its
+    utilisation imbalance is not significantly higher (one-sided Wilcoxon, Holm-corrected).
+    """
+    alpha = rules["alpha"]
+    metrics = ["energy", "makespan", "cost", "sla", "imbalance"]
+    rows = []
+    for sid, g in d.groupby("scenario_id"):
+        med = g.groupby("algorithm")[metrics].median()
+        primary = med.loc[list(references), "energy"].idxmin()
+        for kind, base in (("primary", primary), ("secondary", secondary)):
+            w = g[g.algorithm.isin([candidate, base])].pivot_table(index="rep", columns="algorithm", values=metrics)
+            acc = practical_acceptance(med.loc[candidate].to_dict(), med.loc[base].to_dict(), rules)
+            rows.append({**g.iloc[0][["scenario_id", "tasks", "vms", "heterogeneity", "arrival"]].to_dict(),
+                         "comparison": kind, "reference": base,
+                         "median_energy_chg": 100 * (med.loc[candidate, "energy"] / med.loc[base, "energy"] - 1),
+                         "median_makespan_chg": 100 * acc["makespan_change"],
+                         "median_cost_chg": 100 * acc["cost_change"], "median_sla_chg_pp": acc["sla_change_pp"],
+                         "within_tolerance": acc["within_tolerance"],
+                         "p_energy_less": _wilcoxon(w[("energy", candidate)], w[("energy", base)], "less"),
+                         "p_imbalance_greater": _wilcoxon(w[("imbalance", candidate)], w[("imbalance", base)], "greater"),
+                         "cliffs_delta_energy": cliffs_delta(w[("energy", candidate)].values, w[("energy", base)].values)})
+    t = pd.DataFrame(rows)
+    summary = {}
+    for kind, g in t.groupby("comparison"):
+        idx = g.index
+        t.loc[idx, "p_energy_holm"] = holm_adjust(g.p_energy_less.values)
+        t.loc[idx, "p_imbalance_holm"] = holm_adjust(g.p_imbalance_greater.values)
+    t["energy_reduced"] = t.p_energy_holm < alpha
+    t["imbalance_worse"] = t.p_imbalance_holm < alpha
+    t["h1_supported"] = t.energy_reduced & t.within_tolerance & ~t.imbalance_worse
+    for kind, g in t.groupby("comparison"):
+        # the same test on scenario-level medians, across the 81 scenarios
+        summary[kind] = {"scenarios": int(len(g)), "h1_supported": int(g.h1_supported.sum()),
+                         "energy_reduced": int(g.energy_reduced.sum()), "within_tolerance": int(g.within_tolerance.sum()),
+                         "imbalance_worse": int(g.imbalance_worse.sum()),
+                         "reference_counts": g.reference.value_counts().to_dict(),
+                         "median_energy_chg": float(g.median_energy_chg.median()),
+                         "p_scenario_medians": _wilcoxon(g.median_energy_chg.values, np.zeros(len(g)), "less")}
+    return t, summary
 
 
 def magnitude(delta: float) -> str:
@@ -237,13 +305,28 @@ def main(argv=None):
     ap.add_argument("--figures", default="../results/figures")
     ap.add_argument("--front", default=None, help="dir with dumped fronts for the example-front figure")
     ap.add_argument("--front-stem", default=None)
+    ap.add_argument("--hypothesis-only", action="store_true",
+                    help="only (re)compute hypothesis_tests.csv and the 'hypothesis' entry of summary.json")
     a = ap.parse_args(argv)
     cfg = load_config()
-    os.makedirs(a.out, exist_ok=True); os.makedirs(a.figures, exist_ok=True)
-    runs, trace = load(a.main, "runs"), load(a.main, "trace")
+    os.makedirs(a.out, exist_ok=True)
+    runs = load(a.main, "runs")
+    check_complete(runs, cfg)
     d = deployed(runs)
+    ht, hs = hypothesis_tests(d, cfg["decision_rules"])
+    ht.to_csv(os.path.join(a.out, "hypothesis_tests.csv"), index=False)
+    if a.hypothesis_only:
+        path = os.path.join(a.out, "summary.json")
+        res = json.load(open(path)) if os.path.exists(path) else {}
+        res["hypothesis"] = hs
+        with open(path, "w") as f:
+            json.dump(res, f, indent=2, default=float)
+        print(json.dumps(hs, indent=1, default=float))
+        return
+    os.makedirs(a.figures, exist_ok=True)
+    trace = load(a.main, "trace")
     d.to_csv(os.path.join(a.out, "deployed.csv"), index=False)
-    res = {"instances": int(d[INSTANCE].drop_duplicates().shape[0])}
+    res = {"instances": int(d[INSTANCE].drop_duplicates().shape[0]), "hypothesis": hs}
 
     tables = {"main": summary_table(d, MAIN), "ablation": summary_table(d, ABLATION),
               "fairness": summary_table(d, FAIRNESS), "knee": summary_table(deployed(runs, "knee"), ["mogwo", "hpeas"] + ABLATION[1:])}

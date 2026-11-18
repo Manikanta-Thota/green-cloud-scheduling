@@ -14,7 +14,7 @@ make validate-cloudsim   # downloads CloudSim Plus 8.5.7 jars, replays schedules
 make tune             # parameter tuning on the separate tuning seeds (already frozen in config)
 make experiment       # full matrix: 81 scenarios x 30 replicates x 12 algorithms (~1 h on 8 cores)
 make sensitivity      # one-at-a-time sensitivity, tolerance and power-curve runs
-make analysis         # tables, statistics and figures
+make analysis         # tables, statistics, H0/H1 decision and figures
 ```
 
 Without `make`, run the module commands shown in the `Makefile` from the `python/` directory.
@@ -55,13 +55,13 @@ java -cp "..\java\out-sim;..\java\lib\*" gcs.sim.CloudSimValidation ..\testdata\
 | `python/gcs/baselines.py` | FCFS and Min-Min (precedence-aware), used for parity tests. |
 | `python/gcs/experiment.py` | Orchestration with checkpointing, retry and run log; calls the Java runner. |
 | `python/gcs/tune.py`, `sensitivity.py` | Tuning grid; sensitivity, tolerance and power-curve experiments. |
-| `python/gcs/analysis.py`, `stats.py`, `pareto.py` | Statistics (Friedman, Holm-Wilcoxon, Cliff's delta, bootstrap) and figures. |
+| `python/gcs/analysis.py`, `stats.py`, `pareto.py` | Statistics (Friedman, Holm-Wilcoxon, Cliff's delta, bootstrap), the H0/H1 decision of the protocol (`hypothesis_tests.csv`) and figures. |
 | `python/gcs/validate_cloudsim.py` | CloudSim Plus replay of baseline schedules. |
 | `java/src/main/java/gcs/core/` | Instance, fast evaluator, FCFS, Min-Min, energy-greedy, case-file reader, `SelfCheck`. |
 | `java/src/main/java/gcs/opt/` | GA, MOGWO, HPEAS (+ ablations), archive, indicators, `RunExperiment`, `OptSelfCheck`. |
 | `java/src/main/java/gcs/sim/` | CloudSim Plus validation layer (needs `java/lib`, see `make cloudsim-lib`). |
 | `testdata/` | Hand-checkable and parity cases shared by both languages. |
-| `results/` | Raw per-run CSVs, traces, run logs, tuning, sensitivity and analysis outputs. |
+| `results/` | Raw per-run CSVs, traces, run logs, tuning, sensitivity and analysis outputs; figures in `results/figures/`. |
 
 ## Reproducibility
 

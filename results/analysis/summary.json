@@ -77,5 +77,33 @@
   "energy_kwh_median": {
     "reference": 1.230853329557319,
     "hpeas": 1.1546812489720573
+  },
+  "hypothesis": {
+    "primary": {
+      "scenarios": 81,
+      "h1_supported": 25,
+      "energy_reduced": 78,
+      "within_tolerance": 32,
+      "imbalance_worse": 22,
+      "reference_counts": {
+        "fcfs": 52,
+        "minmin": 17,
+        "ga": 12
+      },
+      "median_energy_chg": -7.2051728239901465,
+      "p_scenario_medians": 2.6813131325564844e-15
+    },
+    "secondary": {
+      "scenarios": 81,
+      "h1_supported": 65,
+      "energy_reduced": 81,
+      "within_tolerance": 65,
+      "imbalance_worse": 0,
+      "reference_counts": {
+        "mogwo": 81
+      },
+      "median_energy_chg": -29.150383118043866,
+      "p_scenario_medians": 2.6813131325564844e-15
+    }
   }
 }

@@ -2,6 +2,18 @@
 
 Versions follow [Semantic Versioning](https://semver.org/). Each release is a git tag (`vX.Y.Z`).
 
+## [2.1.0] - 2026-11-18
+### Added
+- H0/H1 decision exactly as the methodology states it (proposal Section 3.5, protocol D17):
+  `gcs.analysis` compares HPEAS per scenario with the lowest-median-energy baseline among FCFS, Min-Min
+  and GA (one-sided Wilcoxon, Holm-corrected; median makespan and cost +5%, SLA +1 pp; imbalance not
+  significantly worse), with MOGWO as the secondary comparison. Output: `results/analysis/hypothesis_tests.csv`
+  and the `hypothesis` entry of `summary.json`; `--hypothesis-only` recomputes just these.
+- Completeness and finiteness check of the run outputs before analysis (proposal Section 3.3).
+### Changed
+- Figures moved to `results/figures/`.
+- No scheduling, workload or experiment code changed; `results/main` is unchanged.
+
 ## [2.0.0] - 2026-11-14
 ### Changed
 - Workloads are published data, not generated (protocol D15, D16): workflow scenarios use 73
@@ -55,7 +67,7 @@ Versions follow [Semantic Versioning](https://semver.org/). Each release is a gi
 - Experiment outputs under `results/`: pilot and calibration runs, tuning grids, CloudSim Plus validation,
   main experiment (81 scenarios x 30 replicates, 12 methods), example Pareto fronts, sensitivity,
   tolerance, budget and energy-proportional power-curve runs, statistical analysis tables and run logs.
-- Figures in `results/figures/`.
+- Figures (now in `results/figures/`).
 ### Fixed
 - Tolerance-sensitivity variants re-run with the 0.2.0 `--param tol_*` fix; the earlier runs, which used
   the default envelope, are kept in `results/sensitivity_invalid_tol/` (protocol D12).
